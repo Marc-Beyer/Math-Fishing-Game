@@ -1,0 +1,67 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root{
+    --px-scale: 5;
+    --background-gradient: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+}
+
+body{
+    background: black;
+}
+
+#game-container{
+    width: 70%;
+    min-width: 1000px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#game-frame{
+    position: relative;
+    background: rgb(0, 149, 255);
+    padding-top: 56.25%;
+    overflow: hidden;
+}
+
+.gobj{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+img{
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    width: 100%;
+}
+
+#gobj-hook{
+    background-size: contain;
+    width: calc(16px * var(--px-scale));
+    height: calc(16px * var(--px-scale));
+
+    z-index: 100;
+}
+
+#gobj-line{
+    background: black;
+    width: .5vw;
+    height: 1000px;
+    top: -500px;
+
+    z-index: 10;
+}
+
+.fish{
+    width: calc(18px * var(--px-scale));
+    height: calc(9px * var(--px-scale));
+    
+    z-index: 200;
+}
