@@ -9,9 +9,16 @@ class LevelController extends GameObject{
         const[x, y, answer] = Math.getQuestion();
         this.mathFieldElement.innerText = (x + "+" + y + "=" + answer);
 
+        this.curDepth = 0;
+        this.refrashUI = true;
     }
 
-    update(deltaTime){
+    // TODO 
+    aupdate(deltaTime){
+        this.refrashUI = !this.refrashUI;
+        if(this.refrashUI) return;
 
+        if(Fish.prototype.isSinking) this.curDepth += Fish.prototype.sinkSpeed * 0.4;
+        this.mathFieldElement.innerText = Math.floor(this.curDepth);
     }
 }

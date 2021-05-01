@@ -1,7 +1,7 @@
 class Fish extends GameObject{
 
     swimSpeed = 0;
-    swimDirection = -1;
+    _swimDirection = -1;
 
     constructor(posX, posY, width, height, name = "Fish"){
         super(posX, posY, width, height, name);
@@ -10,14 +10,21 @@ class Fish extends GameObject{
         this.isCollisionActive = true;
     }
 
+    get swimDirection() {
+        return this._swimDirection;
+    }
+    set swimDirection(number) {
+        this._swimDirection = number;
+        this.style.transform = "scaleX(" + (-this.swimDirection) + ")";
+        this.text.style.transform = "scaleX(" + (-this.swimDirection) + ")";
+    }
+
     randomizeFish(){
         this.swimSpeed = Math.random() * 0.05 + 0.01;
         if(Math.random() >= 0.5){
             this.swimDirection = -1;
-            this.style.transform = "scaleX(1)";
         }else{
             this.swimDirection = 1;
-            this.style.transform = "scaleX(-1)";
         }
 
         if(Fish.prototype.isSinking){
@@ -37,6 +44,11 @@ class Fish extends GameObject{
 
     createDOMElement(){
         this.img = document.createElement("img");
+        this.text = document.createElement("p");
+        this.text.textContent = "12";
+        this.text.style.position = "absolute";
+        this.text.style.top = "-1rem";
+        this.append(this.text);
         this.append(this.img);
     }
 
@@ -45,7 +57,6 @@ class Fish extends GameObject{
         let isGettingOutOfScreenAtSides = this.positionX > Environment.width + 20 || this.positionX < - this.width - 20;
         if (isGettingOutOfScreenAtSides) {
             this.swimDirection *= -1;
-            this.style.transform = "scaleX(" + (-this.swimDirection) + ")";
         }
         this.positionX += this.swimSpeed * this.swimDirection * deltaTime;
         this.positionY += Fish.prototype.sinkSpeed * deltaTime;

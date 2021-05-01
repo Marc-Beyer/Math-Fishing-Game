@@ -28,7 +28,6 @@ const GAME_MANAGER = new GameManager();
 // Register customElements
 registerCustomElements();
 
-instantiateGameObject(new Hook(Environment.width/2, Environment.height/2, 16, 16));
 
 instantiateGameObject(new LevelController());
 
@@ -40,6 +39,7 @@ for (let index = 0; index < 15; index++) {
     instantiateGameObject(new Bubble(Math.random()*Environment.width-18, Math.random()*Environment.height-9, 18, 9));
 }
 
+instantiateGameObject(new Hook(Environment.width/2, Environment.height/2, 16, 16));
 
 /**
  * Creates an Gameobject, adds it to the gameObjectContainer of the GAME_MANAGER

@@ -8,6 +8,10 @@ Math.randomInt = function(max){
     return Math.floor(Math.random() * (max + 1));
 }
 
+Math.randomIntRange = function(min, max){
+    return Math.floor(Math.random() * (max + 1 - min) + min);
+}
+
 Math.getQuestion = function(){
     let answer = Math.floor(Math.random() * 90) + 10;
     let x = Math.floor(Math.random() * (answer - 2) + 2);

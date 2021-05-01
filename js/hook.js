@@ -15,7 +15,7 @@ class Hook extends GameObject{
     /**
      * Getter and Setter Overritten
      */
-     get positionX() {
+    get positionX() {
         return this._positionX;
     }
     set positionX(number) {
@@ -56,7 +56,11 @@ class Hook extends GameObject{
                     gameObject.style.top = "unset";
                     gameObject.style.left = 0;
                     gameObject.style.bottom = 0;
-                    gameObject.style.zIndex = this.nrOfFishCaught++;
+                    let rdmFishRotation = Math.randomIntRange(20, 150);
+                    let fishOffset = (gameObject.width * Environment.scale.x + (gameObject.height * Environment.scale.y * rdmFishRotation * 0.005) )/2;
+                    gameObject.style.transform = "rotateZ(" + rdmFishRotation + "deg) translate(" + fishOffset + "px)";
+                    gameObject.text.style.display = "none";
+
 
                     if(Fish.prototype.isSinking){
                         Fish.prototype.sinkSpeed = 0.1;
@@ -67,20 +71,6 @@ class Hook extends GameObject{
             }
         }
 
-        /*
-        let difference = this.anchorPointX - this.positionX + this.width/2;
-        console.log(difference);
-        if(difference < -threshold || difference > threshold){
-            this.curHookVelocityX += this.hookSmoothingVelocityX * difference * deltaTime;
-            this.anchorPointLinedUpOnceBefore = false;
-        } else if(!this.anchorPointLinedUpOnceBefore) {
-            this.anchorPointLinedUpOnceBefore = true;
-            this.curHookVelocityX /= 1.5;
-        }
-
-        this.positionX = this.positionX + this.curHookVelocityX;
-
-        */
         if (this.anchorPointX > this.positionX + this.width/2 + threshold) {
             this.curHookVelocityX += this.hookSmoothingVelocityX * deltaTime;
             this.anchorPointLinedUpOnceBefore = false;
@@ -92,11 +82,7 @@ class Hook extends GameObject{
             this.curHookVelocityX /= 1.5;
         }
 
-        //transform.position = new Vector3(transform.position.x + this.curHookVelocityX * deltaTime, yOffset + Mathf.Abs(this.anchorPointX - transform.position.x) * heightFactor, 0);
-        //let difference = this.anchorPointX - this.positionX + this.width/2;
         this.positionX += this.curHookVelocityX;
-
-        //line.SetPosition(0, new Vector3(transform.position.x, transform.position.y + 0.37f, 0));
         
     }
 }
