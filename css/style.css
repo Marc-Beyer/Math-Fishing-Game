@@ -11,12 +11,21 @@
 
 body{
     background: black;
+
+    font-size: 20px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+img{
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    width: 100%;
 }
 
 #game-container{
+    position: absolute;
     width: 70%;
     min-width: 1000px;
-    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -29,39 +38,16 @@ body{
     overflow: hidden;
 }
 
-.gobj{
+#mathField{
     position: absolute;
-    top: 50%;
+    top: 0;
     left: 50%;
-    transform: translate(-50%, -50%);
-}
+    transform: translateX(-50%);
 
-img{
-    image-rendering: pixelated;
-    image-rendering: crisp-edges;
-    width: 100%;
-}
+    padding: .5rem 1rem;
+    background-color: aliceblue;
+    outline: .4rem solid black;
+    font-size: 3rem;
 
-#gobj-hook{
-    background-size: contain;
-    width: calc(16px * var(--px-scale));
-    height: calc(16px * var(--px-scale));
-
-    z-index: 100;
-}
-
-#gobj-line{
-    background: black;
-    width: .5vw;
-    height: 1000px;
-    top: -500px;
-
-    z-index: 10;
-}
-
-.fish{
-    width: calc(18px * var(--px-scale));
-    height: calc(9px * var(--px-scale));
-    
-    z-index: 200;
+    z-index: 1000;
 }

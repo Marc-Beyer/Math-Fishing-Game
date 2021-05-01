@@ -30,6 +30,8 @@ registerCustomElements();
 
 instantiateGameObject(new Hook(Environment.width/2, Environment.height/2, 16, 16));
 
+instantiateGameObject(new LevelController());
+
 for (let index = 0; index < 15; index++) {
     instantiateGameObject(new Fish(Math.random()*Environment.width-18, Math.random()*Environment.height-9, 18, 9));
 }
@@ -37,6 +39,7 @@ for (let index = 0; index < 15; index++) {
 for (let index = 0; index < 15; index++) {
     instantiateGameObject(new Bubble(Math.random()*Environment.width-18, Math.random()*Environment.height-9, 18, 9));
 }
+
 
 /**
  * Creates an Gameobject, adds it to the gameObjectContainer of the GAME_MANAGER
@@ -54,6 +57,7 @@ function instantiateGameObject(gameObject){
  */
 function registerCustomElements(){
     customElements.define("game-object", GameObject);
+    customElements.define("game-object-level-controller", LevelController);
     customElements.define("game-object-fish", Fish);
     customElements.define("game-object-bubble", Bubble);
     customElements.define("game-object-hook", Hook);
