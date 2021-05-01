@@ -7,7 +7,7 @@ class Input {
         Input.prototype.down = false;
         Input.prototype.space = false;
         
-        Input.prototype.mousePosition = {x: 0, y: 0};
+        Input.prototype.mousePosition = {x: Environment.width/2 , y: 0};
         Input.prototype._mouseScroll = 0;
         Input.prototype.mouseScrollFactor = -0.005;
 
@@ -80,6 +80,10 @@ class Input {
             case "Spacebar":
             case " ":
                 Input.prototype.space = true;
+                break;
+            case "Escape":
+                GAME_MANAGER.isActive = !GAME_MANAGER.isActive;
+                console.log("pause", GAME_MANAGER.isActive);
                 break;
             default:
                 return; // Quit when Input.prototype doesn't handle the key event.

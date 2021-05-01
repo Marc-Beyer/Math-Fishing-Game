@@ -2,12 +2,28 @@ class GameManager{
     
     lastTimeStamp = 0;
     gameObjectContainer = [];
+    _isActive = true;
 
     /**
      * Starts the gameloop
      */
     constructor(){
-        this.callGameloop();
+        this.startGameloop();
+    }
+
+    get isActive() {
+        return this._isActive;
+    }
+    set isActive(boolean) {
+        this._isActive = boolean;
+        if(this._isActive) this.startGameloop();
+    }
+
+    startGameloop(){
+        window.requestAnimationFrame((timestamp)=>{
+            this.lastTimeStamp = timestamp;
+            this.update(timestamp);
+        });
     }
 
     /**
@@ -29,7 +45,7 @@ class GameManager{
         this.callUpdateOnAllGameObjects(deltaTime);
 
         // Recall loop
-        this.callGameloop();
+        if(this.isActive) this.callGameloop();
     }
 
     /**
