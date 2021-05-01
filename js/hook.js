@@ -83,6 +83,5 @@ class Hook extends GameObject{
         }
 
         this.positionX += this.curHookVelocityX;
-        
     }
 }

@@ -36,18 +36,17 @@ window.addEventListener('resize', ()=>{
             y: 0
         },
         scale: {
-            x: 4,
-            y: 4
+            x: scale,
+            y: scale
         },
-        width: boundingRect.width / 4,
-        height: boundingRect.height / 4,
+        width: boundingRect.width / scale,
+        height: boundingRect.height / scale,
         realWidth: boundingRect.width,
         realHeight: boundingRect.height
     };
     INPUT.calcOffset();
     for (const gameObject of GAME_MANAGER.gameObjectContainer) {
         gameObject.resize();
-        console.log(gameObject);
     }
 });
 
