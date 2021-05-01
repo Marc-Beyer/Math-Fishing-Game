@@ -6,6 +6,8 @@ const gameFrame = document.querySelector("#game-frame");
 // Color #06248C
 let boundingRect = gameFrame.getBoundingClientRect();
 let scale = boundingRect.width/333;
+if(boundingRect.width < 800)
+    scale = boundingRect.width/150;
 
 let Environment = {
         offset: {
@@ -29,6 +31,8 @@ const GAME_MANAGER = new GameManager();
 window.addEventListener('resize', ()=>{
     boundingRect = gameFrame.getBoundingClientRect();
     scale = boundingRect.width/333;
+    if(boundingRect.width < 800)
+        scale = boundingRect.width/150;
 
     Environment = {
         offset: {

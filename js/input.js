@@ -18,6 +18,9 @@ class Input {
         window.addEventListener("keyup", Input.prototype.keyUpHandler, true);
         
         gameFrame.addEventListener("mousemove", Input.prototype.mousemoveHandler, true);
+
+        gameFrame.addEventListener("touchmove", Input.prototype.touchmoveHandler, false);
+        
         gameFrame.addEventListener("wheel", Input.prototype.mouseWheelHandler, true);
     }
 
@@ -38,6 +41,14 @@ class Input {
     mouseWheelHandler(event){
         event.preventDefault();
         Input.prototype.mouseScroll = event.deltaY * Input.prototype.mouseScrollFactor;
+    }
+
+    touchmoveHandler(event){
+        event.preventDefault();
+        Input.prototype.mousePosition = {
+            x: (event.changedTouches[0].pageX - Input.prototype.offsetX) / Environment.scale.x, 
+            y: (event.changedTouches[0].pageY - Input.prototype.offsetY) / Environment.scale.y
+        };
     }
 
     /**
