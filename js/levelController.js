@@ -1,5 +1,7 @@
 class LevelController extends GameObject{
 
+    maxDepth = -10;
+
     constructor(name = "LevelController"){
         super(0,0,0,0,name);
 
@@ -14,11 +16,14 @@ class LevelController extends GameObject{
     }
 
     // TODO 
-    aupdate(deltaTime){
+    update(deltaTime){
         this.refrashUI = !this.refrashUI;
         if(this.refrashUI) return;
-
-        if(Fish.prototype.isSinking) this.curDepth += Fish.prototype.sinkSpeed * 0.4;
-        this.mathFieldElement.innerText = Math.floor(this.curDepth);
+        
+        let backgroundColor = Math.LerpRGBColor({r: 0, g: 149, b: 255}, {r: 6, g: 35, b: 142}, this.curDepth / this.maxDepth);
+        gameFrame.style.background = "rgb(" + backgroundColor.r + "," + backgroundColor.g + "," + backgroundColor.b + ")";
+        
+        if(Fish.prototype.isSinking || Fish.prototype.isSRising) this.curDepth += Fish.prototype.sinkSpeed * 0.4;
+        this.depthMeterElement.innerText = Math.floor(this.curDepth);
     }
 }

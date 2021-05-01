@@ -39,13 +39,13 @@ class Fish extends GameObject{
         this.img.src = FISH_DICTIONARY[rdmNr].src;
         this.width = FISH_DICTIONARY[rdmNr].width;
         this.height = FISH_DICTIONARY[rdmNr].height;
-
+        
+        this.text.textContent = Math.randomInt(100);
     }
 
     createDOMElement(){
         this.img = document.createElement("img");
         this.text = document.createElement("p");
-        this.text.textContent = "12";
         this.text.style.position = "absolute";
         this.text.style.top = "-1rem";
         this.append(this.text);

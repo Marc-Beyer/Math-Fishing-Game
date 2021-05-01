@@ -81,4 +81,11 @@ class GameObject extends HTMLElement{
         }
         return false;
     }
+
+    resize(){
+        this.positionX = this.positionX;
+        this.positionY = this.positionY;
+        this.width = this.width;
+        this.height = this.height;
+    }
 }

@@ -4,6 +4,17 @@ Math.clamp = function(value, min, max){
     return value;
 }
 
+Math.Lerp = function(start, end, time){
+    return start + (end - start) * time;
+}
+
+Math.LerpRGBColor = function(start, end, time){
+    start.r = start.r + (end.r - start.r) * time;
+    start.g = start.g + (end.g - start.g) * time;
+    start.b = start.b + (end.b - start.b) * time;
+    return start;
+}
+
 Math.randomInt = function(max){
     return Math.floor(Math.random() * (max + 1));
 }

@@ -1,4 +1,3 @@
-const hook = document.querySelector("#gobj-hook");
 const root = document.documentElement;
 const gameFrame = document.querySelector("#game-frame");
 
@@ -6,8 +5,32 @@ const gameFrame = document.querySelector("#game-frame");
 // Color #0094FF
 // Color #06248C
 let boundingRect = gameFrame.getBoundingClientRect();
+let scale = boundingRect.width/333;
 
 let Environment = {
+        offset: {
+            x: 0,
+            y: 0
+        },
+        scale: {
+            x: scale,
+            y: scale
+        },
+        width: boundingRect.width / scale,
+        height: boundingRect.height / scale,
+        realWidth: boundingRect.width,
+        realHeight: boundingRect.height
+};
+
+const INPUT = new Input();
+const GAME_MANAGER = new GameManager();
+
+// Add resize event listener
+window.addEventListener('resize', ()=>{
+    boundingRect = gameFrame.getBoundingClientRect();
+    scale = boundingRect.width/333;
+
+    Environment = {
         offset: {
             x: 0,
             y: 0
@@ -20,10 +43,13 @@ let Environment = {
         height: boundingRect.height / 4,
         realWidth: boundingRect.width,
         realHeight: boundingRect.height
-};
-
-const INPUT = new Input();
-const GAME_MANAGER = new GameManager();
+    };
+    INPUT.calcOffset();
+    for (const gameObject of GAME_MANAGER.gameObjectContainer) {
+        gameObject.resize();
+        console.log(gameObject);
+    }
+});
 
 // Register customElements
 registerCustomElements();

@@ -30,6 +30,11 @@ class Input {
         Input.prototype._mouseScroll = number;
     }
 
+    calcOffset(){
+        Input.prototype.offsetX = gameFrame.getBoundingClientRect().x;
+        Input.prototype.offsetY = gameFrame.getBoundingClientRect().y;
+    }
+
     mouseWheelHandler(event){
         event.preventDefault();
         Input.prototype.mouseScroll = event.deltaY * Input.prototype.mouseScrollFactor;

@@ -14,8 +14,7 @@ class Line extends GameObject{
         
         this.innetLine = document.createElement("div");
         this.innetLine.style.background = "#000";
-        this.innetLine.style.height = (this.height * Environment.scale.y / 2) + "px";
-        console.log(this.height + "   " + (this.height * Environment.scale.y / 2 + this.width) + "px");
+        this.innetLine.style.height = (this.height * Environment.scale.y / 2 + 1) + "px";
         this.append(this.innetLine);
 
     }
@@ -25,7 +24,6 @@ class Line extends GameObject{
         let xDistanceBetweenAnchorAndHook = hookAnchorX - this.hook.anchorPointX;
 
         // Set the line to the hook position and rotate to the right angle
-        
         this.style.transform = "rotate(" + -Math.atan( xDistanceBetweenAnchorAndHook / this.hook.positionY ) * 180/Math.PI + "deg)";
     }
 }

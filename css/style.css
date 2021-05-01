@@ -25,7 +25,6 @@ img{
 #game-container{
     position: absolute;
     width: 70%;
-    min-width: 1000px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -33,7 +32,11 @@ img{
 
 #game-frame{
     position: relative;
+    /*
     background: rgb(0, 149, 255);
+    background: rgb(0, 149, 255);
+    background: rgb(6, 35, 142);
+    */
     padding-top: 56.25%;
     overflow: hidden;
 }
@@ -50,4 +53,27 @@ img{
     font-size: 3rem;
 
     z-index: 1000;
+}
+
+@media screen and (max-width: 1000px) {
+
+    #game-container{
+        width: 85%;
+    }
+}
+
+@media screen and (max-width: 800px) {
+
+    #game-container{
+        width: 100%;
+        top: 0%;
+        left: 0%;
+        transform: unset;
+    }
+
+    #game-frame{
+        height: 100vh;
+        padding: 0;
+        overflow: hidden;
+    }
 }
