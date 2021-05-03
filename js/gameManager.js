@@ -47,6 +47,17 @@ class GameManager{
         // Recall loop
         if(this.isActive) this.callGameloop();
     }
+    
+    /**
+     * Creates an Gameobject, adds it to the gameObjectContainer of the GAME_MANAGER
+     * and appands it to the gameFrame
+     * @param {GameObject} gameObject
+     */
+    instantiateGameObject(gameObject){
+        this.gameObjectContainer.push(gameObject);
+        GAME_FRAME.append(gameObject);
+        return gameObject;
+    }
 
     /**
      * Invoke the update function on all GameObjects of the gameObjectContainer
@@ -57,29 +68,11 @@ class GameManager{
             if(gameObject.isActive) gameObject.update(deltaTime);
         }
     }
+
+    removeAllGameObjects(){
+        for (const gameObject of this.gameObjectContainer) {
+            gameObject.remove();
+        }
+        this.gameObjectContainer = [];
+    }
 }
-
-
-
-/*
-
-root.style.setProperty("--background-gradient", "linear-gradient(0deg, rgba(9,9,121," + this.backgroundAlpha + "), rgba(1,212,255," + this.backgroundAlpha + "))");
-this.backgroundAlpha -= deltaTime * .00001;
-
-
-if(fish.isSwimmingRight){
-                fish.style.left = fish.pos + "px";
-                fish.pos += fish.speed * deltaTime;
-                if(fish.pos > 2000){
-                    fish.isSwimmingRight = false;
-                    fish.style.transform = "scaleX(1)";
-                }
-            }else{
-                fish.style.left = fish.pos + "px";
-                fish.pos -= fish.speed * deltaTime;
-                if(fish.pos < -100){
-                    fish.isSwimmingRight = true;
-                    fish.style.transform = "scaleX(-1)";
-                }
-            }
-*/

@@ -17,6 +17,13 @@ class LevelController extends GameObject{
 
         this.curDepth = 0;
         this.refrashUI = true;
+
+        // Set static values
+        Fish.prototype.sinkSpeed = -0.03;
+        Fish.prototype.isSinking = true;
+        Fish.prototype.isSRising = false;
+        Fish.prototype.curNrTillCorrectAnswer = 5;
+        Fish.prototype.nrTillCorrectAnswer = 7;
     }
 
     // TODO 
@@ -25,7 +32,7 @@ class LevelController extends GameObject{
         if(this.refrashUI) return;
         
         let backgroundColor = Math.LerpRGBColor({r: 0, g: 149, b: 255}, {r: 6, g: 35, b: 142}, this.curDepth / this.maxDepth);
-        gameFrame.style.background = "rgb(" + backgroundColor.r + "," + backgroundColor.g + "," + backgroundColor.b + ")";
+        GAME_FRAME.style.background = "rgb(" + backgroundColor.r + "," + backgroundColor.g + "," + backgroundColor.b + ")";
         
         if(Fish.prototype.isSinking || Fish.prototype.isSRising) this.curDepth += Fish.prototype.sinkSpeed * 0.4;
         this.depthMeterElement.innerText = Math.floor(this.curDepth);
@@ -44,7 +51,10 @@ class LevelController extends GameObject{
                 this.hook.isYPositionControlledByScript = true;
             }else{
                 if(this.hook.curYPositionAnimationState > 1){
-                    location.reload();
+                    Fish.prototype.isSRising = false;
+                    Fish.prototype.isSinking = false;
+                    Fish.prototype.sinkSpeed = 0;
+                    SCENE_MANAGER.loadScene(0);
                 }
             }
         }
