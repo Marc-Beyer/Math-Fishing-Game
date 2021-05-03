@@ -40,7 +40,14 @@ class Fish extends GameObject{
         this.width = FISH_DICTIONARY[rdmNr].width;
         this.height = FISH_DICTIONARY[rdmNr].height;
         
-        this.text.textContent = Math.randomInt(100);
+        if(Fish.prototype.curNrTillCorrectAnswer > 0){
+            this.number = Math.randomInt(100);
+        }else{
+            Fish.prototype.curNrTillCorrectAnswer = Fish.prototype.nrTillCorrectAnswer;
+            this.number = LevelController.prototype.answer;
+        }
+        this.text.textContent = this.number;
+        Fish.prototype.curNrTillCorrectAnswer--;
     }
 
     createDOMElement(){
@@ -76,3 +83,6 @@ class Fish extends GameObject{
 Fish.prototype.sinkSpeed = -0.03;
 Fish.prototype.isSinking = true;
 Fish.prototype.isSRising = false;
+
+Fish.prototype.curNrTillCorrectAnswer = 5;
+Fish.prototype.nrTillCorrectAnswer = 7;

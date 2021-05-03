@@ -4,11 +4,23 @@ Math.clamp = function(value, min, max){
     return value;
 }
 
+// TODO remove and grep for old functions
 Math.Lerp = function(start, end, time){
     return start + (end - start) * time;
 }
 
 Math.LerpRGBColor = function(start, end, time){
+    start.r = start.r + (end.r - start.r) * time;
+    start.g = start.g + (end.g - start.g) * time;
+    start.b = start.b + (end.b - start.b) * time;
+    return start;
+}
+
+Math.lerp = function(start, end, time){
+    return start + (end - start) * time;
+}
+
+Math.lerpRGBColor = function(start, end, time){
     start.r = start.r + (end.r - start.r) * time;
     start.g = start.g + (end.g - start.g) * time;
     start.b = start.b + (end.b - start.b) * time;
@@ -28,10 +40,6 @@ Math.getQuestion = function(){
     let x = Math.floor(Math.random() * (answer - 2) + 2);
     let y = answer - x;
     return [x, y, answer];
-}
-
-Math.LerpColor = function(color1, color2, time){
-    return color1;
 }
 
 Math.distance = function(a, b){

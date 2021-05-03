@@ -7,7 +7,7 @@ class Input {
         Input.prototype.down = false;
         Input.prototype.space = false;
         
-        Input.prototype.mousePosition = {x: Environment.width/2 , y: 0};
+        Input.prototype.mousePosition = {x: gameFrame.getBoundingClientRect().x/2, y: 0};
         Input.prototype._mouseScroll = 0;
         Input.prototype.mouseScrollFactor = -0.005;
 
@@ -18,9 +18,7 @@ class Input {
         window.addEventListener("keyup", Input.prototype.keyUpHandler, true);
         
         gameFrame.addEventListener("mousemove", Input.prototype.mousemoveHandler, true);
-
         gameFrame.addEventListener("touchmove", Input.prototype.touchmoveHandler, false);
-        
         gameFrame.addEventListener("wheel", Input.prototype.mouseWheelHandler, true);
     }
 

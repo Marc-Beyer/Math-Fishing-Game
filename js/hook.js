@@ -5,6 +5,13 @@ class Hook extends GameObject{
     anchorPointMaxSmoothSpeed = 1;
     hookSmoothingVelocityX = 0.01;
     curHookVelocityX = 0;
+
+    isYPositionControlledByScript = true;
+    nextYPosition = Environment.height/2;
+    lastYPosition = 0;
+    yPositionAnimationFactor = 0.001;
+    curYPositionAnimationState = 0;
+
     nrOfFishCaught = 0;
 
     constructor(posX, posY, width, height, name = "Hook"){
@@ -35,39 +42,32 @@ class Hook extends GameObject{
     }
 
     update(deltaTime){
-        this.anchorPointX = INPUT.mousePosition.x;
 
-        this.positionY = Math.clamp(this.positionY + INPUT.mouseScroll * deltaTime, 10, Environment.height - this.height - 10);
+        this.calcYPosition(deltaTime);
 
         this.smoothAnchorPoint(deltaTime);
+    }
 
-        Math.getQuestion();
+    calcYPosition(deltaTime) {
+        if(this.isYPositionControlledByScript){
+            this.curYPositionAnimationState += deltaTime * this.yPositionAnimationFactor;
+            this.positionY = Math.lerp(this.lastYPosition, this.nextYPosition, this.curYPositionAnimationState);
+            if(!Fish.prototype.isSRising && this.curYPositionAnimationState >= 1){
+                this.curYPositionAnimationState = 1;
+                this.isYPositionControlledByScript = false;
+            }
+        }else{
+            this.positionY = Math.clamp(this.positionY + INPUT.mouseScroll * deltaTime, 10, Environment.height - this.height - 10);
+        }
     }
 
     smoothAnchorPoint(deltaTime) {
         let threshold = 10;
+        this.anchorPointX = INPUT.mousePosition.x;
 
         for(let gameObject of GAME_MANAGER.gameObjectContainer){
             if(gameObject.isCollidingWith(this.positionX, this.positionY, this.width, this.height)){
-                if(gameObject instanceof Fish){
-                    this.append(gameObject);
-                    gameObject.isActive = false;
-                    gameObject.isCollisionActive = false;
-                    gameObject.style.top = "unset";
-                    gameObject.style.left = 0;
-                    gameObject.style.bottom = 0;
-                    let rdmFishRotation = Math.randomIntRange(20, 150);
-                    let fishOffset = (gameObject.width * Environment.scale.x + (gameObject.height * Environment.scale.y * rdmFishRotation * 0.005) )/2;
-                    gameObject.style.transform = "rotateZ(" + rdmFishRotation + "deg) translate(" + fishOffset + "px)";
-                    gameObject.text.style.display = "none";
-
-
-                    if(Fish.prototype.isSinking){
-                        Fish.prototype.sinkSpeed = 0.1;
-                        Fish.prototype.isSinking = false;
-                        Fish.prototype.isSRising = true;
-                    }
-                }
+                this.handleCollision(gameObject);
             }
         }
 
@@ -83,5 +83,34 @@ class Hook extends GameObject{
         }
 
         this.positionX += this.curHookVelocityX;
+    }
+
+    handleCollision(gameObject) {
+        let isFish = gameObject instanceof Fish;
+        if (isFish) {
+            this.handleCollisionWithAFish(gameObject);
+        }
+    }
+
+    handleCollisionWithAFish(gameObject) {
+        let isAnswerCorrect = LevelController.prototype.answer === gameObject.number;
+        if (Fish.prototype.isSRising || isAnswerCorrect) {
+            this.append(gameObject);
+            gameObject.isActive = false;
+            gameObject.isCollisionActive = false;
+            gameObject.style.top = "unset";
+            gameObject.style.left = 0;
+            gameObject.style.bottom = 0;
+            let rdmFishRotation = Math.randomIntRange(20, 150);
+            let fishOffset = (gameObject.width * Environment.scale.x + (gameObject.height * Environment.scale.y * rdmFishRotation * 0.005)) / 2;
+            gameObject.style.transform = "rotateZ(" + rdmFishRotation + "deg) translate(" + fishOffset + "px)";
+            gameObject.text.style.display = "none";
+
+            if (Fish.prototype.isSinking || !Fish.prototype.isSRising) {
+                Fish.prototype.sinkSpeed = 0.1;
+                Fish.prototype.isSinking = false;
+                Fish.prototype.isSRising = true;
+            }
+        }
     }
 }
