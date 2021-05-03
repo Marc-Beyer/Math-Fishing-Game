@@ -1,6 +1,7 @@
 // Load core components
 const GAME_FRAME = document.querySelector("#game-frame");
 const GAME_MANAGER = new GameManager();
+const UI_MANAGER = new UIManager;
 const SCENE_MANAGER = new SceneManager();
 const INPUT = new Input();
 

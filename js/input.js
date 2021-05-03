@@ -96,8 +96,7 @@ class Input {
                 Input.prototype.space = true;
                 break;
             case "Escape":
-                GAME_MANAGER.isActive = !GAME_MANAGER.isActive;
-                console.log("pause", GAME_MANAGER.isActive);
+                UI_MANAGER.toggleMenu();
                 break;
             default:
                 return; // Quit when Input.prototype doesn't handle the key event.

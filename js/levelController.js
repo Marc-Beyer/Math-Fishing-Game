@@ -28,6 +28,7 @@ class LevelController extends GameObject{
 
     // TODO 
     update(deltaTime){
+
         this.refrashUI = !this.refrashUI;
         if(this.refrashUI) return;
         
@@ -59,4 +60,6 @@ class LevelController extends GameObject{
             }
         }
     }
+
+
 }

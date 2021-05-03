@@ -111,6 +111,9 @@ class Hook extends GameObject{
                 Fish.prototype.isSinking = false;
                 Fish.prototype.isSRising = true;
             }
+        }else{
+            gameObject.isCollisionActive = false;
+            UI_MANAGER.showWrongMSG();
         }
     }
 }
