@@ -1,12 +1,18 @@
 class SceneManager{
 
     scenes = [this.loadFishingScene, this.loadTestScene];
+    curScene = 0;
 
     constructor(){}
 
     loadScene(sceneNr = 0){
         GAME_MANAGER.removeAllGameObjects();
+        this.curScene = sceneNr;
         this.scenes[sceneNr]();
+    }
+
+    reloadScene = ()=>{
+        this.loadScene(this.curScene);
     }
 
     loadFishingScene(){
