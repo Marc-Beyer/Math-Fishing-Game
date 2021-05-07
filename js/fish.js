@@ -19,6 +19,8 @@ class Fish extends GameObject{
         this.text.style.transform = "scaleX(" + (-this.swimDirection) + ")";
     }
 
+    // Reuse the fish-GameObject
+    // Set new values and move to the other side of the screen
     randomizeFish(){
         this.swimSpeed = Math.random() * 0.05 + 0.01;
         if(Math.random() >= 0.5){
@@ -48,8 +50,11 @@ class Fish extends GameObject{
         }
         this.text.textContent = this.number;
         Fish.prototype.curNrTillCorrectAnswer--;
+
+        this.isCollisionActive = true;
     }
 
+    // overwrite method
     createDOMElement(){
         this.img = document.createElement("img");
         this.text = document.createElement("p");
@@ -59,6 +64,7 @@ class Fish extends GameObject{
         this.append(this.img);
     }
 
+    // overwrite method
     update(deltaTime){
         //transform.position += new Vector3(SwimSpeed * SwimDirection, -sinkSpeed + additionalSinkSpeed, 0) * Time.deltaTime;
         let isGettingOutOfScreenAtSides = this.positionX > Environment.width + 20 || this.positionX < - this.width - 20;
@@ -80,6 +86,7 @@ class Fish extends GameObject{
     }
 }
 
+// "Static" variables
 Fish.prototype.sinkSpeed = -0.03;
 Fish.prototype.isSinking = true;
 Fish.prototype.isSRising = false;

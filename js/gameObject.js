@@ -1,14 +1,16 @@
 class GameObject extends HTMLElement{
-    // If the Gameobject can collide
+    /**
+     * If the Gameobject can collide
+     */
     isCollisionActive = false;
 
     /**
-     * 
-     * @param {number} posX 
-     * @param {number} posY 
-     * @param {number} width 
-     * @param {number} height 
-     * @param {string} name 
+     * A gameobject, that is an HTMLElement and should be con trolled by the GameManager.
+     * @param {number} posX the x-position (position-left)
+     * @param {number} posY the y-position (position-top)
+     * @param {number} width the width
+     * @param {number} height the height
+     * @param {string} name the name
      */
     constructor(posX, posY, width, height, name = "GameObject"){
         super();
@@ -61,15 +63,28 @@ class GameObject extends HTMLElement{
         this.style.height = this._height * Environment.scale.y + "px";
     }
 
+    /**
+     * Is called in the constructor
+     * Create your DOMElements here
+     */
     createDOMElement(){}
 
+    /**
+     * Is called every frame
+     * @param {number} deltaTime the time passed since last frame. 
+     */
     update(deltaTime){}
 
+    /**
+     * Checks if the collider is colliding with this GameObject
+     * @param {number} posX the x-position (position-left) of the collider
+     * @param {number} posY the y-position (position-top) of the collider
+     * @param {number} width the width of the collider
+     * @param {number} height the height of the collider
+     * @returns {boolean} True if the collider is colliding with this GameObject
+     */
     isCollidingWith(posX, posY, width, height){
         if(!this.isCollisionActive) return false;
-
-        //if(Math.distance(this.positionX, posX) > width + this.width) return false;
-        //if(Math.distance(this.positionY, posY) > height + this.height) return false;
 
         if (
             this.positionX < posX + width &&
@@ -82,6 +97,10 @@ class GameObject extends HTMLElement{
         return false;
     }
 
+    /**
+     * Is called when the gameFrame is resized.
+     * Resets the position and scale to update the the new Envirement values
+     */
     resize(){
         this.positionX = this.positionX;
         this.positionY = this.positionY;

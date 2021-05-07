@@ -3,11 +3,15 @@ isMenuOpen = false;
 
     constructor(){
         this.menu = document.querySelector("#menu");
+        this.fullscreenBtn = document.querySelector("#fullscreenBtn");
         this.restartBtn = document.querySelector("#restartBtn");
         this.resumeBtn = document.querySelector("#resumeBtn");
         this.wrongIndicator = document.querySelector("#wrongIndicator");
 
         this.wrongIndicator.addEventListener("animationend", this.wrongMSGAnimationendHandler);
+        this.fullscreenBtn.addEventListener("click", ()=>{
+            this.toggleFullScreen();
+        });
         this.restartBtn.addEventListener("click", ()=>{
             SCENE_MANAGER.reloadScene();
             this.toggleMenu();
@@ -34,4 +38,16 @@ isMenuOpen = false;
             this.menu.classList.remove("show");
         }
     }
+
+    // src: https://developer.mozilla.org/en-US/docs/Web/API/Fullscreen_API
+    toggleFullScreen() {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen();
+        } else {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            }
+        }
+        setFrameSize();
+      }
 }
