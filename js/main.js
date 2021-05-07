@@ -36,7 +36,7 @@ function registerCustomElements(){
  */
 function setFrameSize(){
     boundingRect = GAME_FRAME.getBoundingClientRect();
-    scale = boundingRect.width/333;
+    scale = boundingRect.width/433;
     if(boundingRect.width < 800)
         scale = boundingRect.width/150;
 
