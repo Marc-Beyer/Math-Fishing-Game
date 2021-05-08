@@ -93,7 +93,7 @@ class Hook extends GameObject{
     }
 
     handleCollisionWithAFish(gameObject) {
-        let isAnswerCorrect = LevelController.prototype.answer === gameObject.number;
+        let isAnswerCorrect = FishingController.prototype.answer === gameObject.number;
         if (Fish.prototype.isSRising || isAnswerCorrect) {
             this.append(gameObject);
             gameObject.isActive = false;

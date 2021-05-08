@@ -24,7 +24,7 @@ SCENE_MANAGER.loadScene(LevelEnum.fishing);
  */
 function registerCustomElements(){
     customElements.define("game-object", GameObject);
-    customElements.define("game-object-level-controller", LevelController);
+    customElements.define("game-object-level-controller", FishingController);
     customElements.define("game-object-fish", Fish);
     customElements.define("game-object-bubble", Bubble);
     customElements.define("game-object-hook", Hook);

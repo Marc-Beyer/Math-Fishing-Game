@@ -46,7 +46,7 @@ class Fish extends GameObject{
             this.number = Math.randomInt(100);
         }else{
             Fish.prototype.curNrTillCorrectAnswer = Fish.prototype.nrTillCorrectAnswer;
-            this.number = LevelController.prototype.answer;
+            this.number = FishingController.prototype.answer;
         }
         this.text.textContent = this.number;
         Fish.prototype.curNrTillCorrectAnswer--;

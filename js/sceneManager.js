@@ -34,7 +34,7 @@ class SceneManager{
     loadFishingScene(){
         // Spawn 
         let hook = new Hook(Environment.width/2, Environment.height/2, 16, 16)
-        GAME_MANAGER.instantiateGameObject(new LevelController(hook));
+        GAME_MANAGER.instantiateGameObject(new FishingController(hook));
         GAME_MANAGER.instantiateGameObject(hook);
     
         // Spawn fish and bubbles
@@ -49,7 +49,7 @@ class SceneManager{
     loadTestScene(){
         // Spawn 
         let hook = new Hook(Environment.width/2, Environment.height/2, 16, 16)
-        GAME_MANAGER.instantiateGameObject(new LevelController(hook));
+        GAME_MANAGER.instantiateGameObject(new FishingController(hook));
         GAME_MANAGER.instantiateGameObject(hook);
     
         // Spawn fish and bubbles

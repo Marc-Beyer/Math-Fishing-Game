@@ -1,8 +1,8 @@
-class LevelController extends GameObject{
+class FishingController extends GameObject{
 
     maxDepth = -20;
 
-    constructor(hook, name = "LevelController"){
+    constructor(hook, name = "FishingController"){
         super(0,0,0,0,name);
 
         this.hook = hook;
@@ -14,7 +14,7 @@ class LevelController extends GameObject{
         const[x, y, answer] = Math.getQuestion();
         this.mathFieldElement.innerText = (x + "+" + y + "= ?");
 
-        LevelController.prototype.answer = answer;
+        FishingController.prototype.answer = answer;
 
         this.curDepth = 0;
         this.refrashUI = true;
