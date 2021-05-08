@@ -1,4 +1,4 @@
-const LevelEnum = Object.freeze({
+const SceneEnum = Object.freeze({
     "intro": 0,
     "town": 1,
     "fishing": 2,
@@ -8,11 +8,11 @@ const LevelEnum = Object.freeze({
 class SceneManager{
 
     scenes = [this.loadIntroScene, this.loadTownScene, this.loadFishingScene, this.loadTestScene];
-    curScene = LevelEnum.intro;
+    curScene = SceneEnum.intro;
 
     constructor(){}
 
-    loadScene(sceneNr = LevelEnum.intro){
+    loadScene(sceneNr = SceneEnum.intro){
         GAME_MANAGER.removeAllGameObjects();
         this.curScene = sceneNr;
         this.scenes[sceneNr]();

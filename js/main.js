@@ -17,7 +17,7 @@ setFrameSize();
 registerCustomElements();
 
 // Load the first scene
-SCENE_MANAGER.loadScene(LevelEnum.fishing);
+SCENE_MANAGER.loadScene(SceneEnum.fishing);
 
 /**
  * Registers all custom elements

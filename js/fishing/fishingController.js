@@ -59,7 +59,7 @@ class FishingController extends GameObject{
                     Fish.prototype.isSRising = false;
                     Fish.prototype.isSinking = false;
                     Fish.prototype.sinkSpeed = 0;
-                    SCENE_MANAGER.loadScene(0);
+                    SCENE_MANAGER.loadScene(SceneEnum.fishing);
                 }
             }
         }
