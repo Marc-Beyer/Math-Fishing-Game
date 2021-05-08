@@ -17,7 +17,7 @@ setFrameSize();
 registerCustomElements();
 
 // Load the first scene
-SCENE_MANAGER.loadScene(0);
+SCENE_MANAGER.loadScene(LevelEnum.fishing);
 
 /**
  * Registers all custom elements
@@ -29,6 +29,7 @@ function registerCustomElements(){
     customElements.define("game-object-bubble", Bubble);
     customElements.define("game-object-hook", Hook);
     customElements.define("game-object-line", Line);
+    customElements.define("game-object-player", Player);
 }
 
 /**

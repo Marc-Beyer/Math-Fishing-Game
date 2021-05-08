@@ -1,3 +1,6 @@
+/**
+ * The basic DomElement
+ */
 class GameObject extends HTMLElement{
     /**
      * If the Gameobject can collide
@@ -36,7 +39,7 @@ class GameObject extends HTMLElement{
     }
     set positionX(number) {
         this._positionX = number;
-        this.style.left = this._positionX * Environment.scale.x + "px";
+        this.style.left = this._positionX * Environment.scale.x + Environment.offset.x + "px";
     }
     
     get positionY() {
@@ -44,7 +47,7 @@ class GameObject extends HTMLElement{
     }
     set positionY(number) {
         this._positionY = number;
-        this.style.top = this._positionY * Environment.scale.y + "px";
+        this.style.top = this._positionY * Environment.scale.y + Environment.offset.y + "px";
     }
 
     get width() {

@@ -1,11 +1,18 @@
+const LevelEnum = Object.freeze({
+    "intro": 0,
+    "town": 1,
+    "fishing": 2,
+    "test": 3
+}); 
+
 class SceneManager{
 
-    scenes = [this.loadFishingScene, this.loadTestScene];
-    curScene = 0;
+    scenes = [this.loadIntroScene, this.loadTownScene, this.loadFishingScene, this.loadTestScene];
+    curScene = LevelEnum.intro;
 
     constructor(){}
 
-    loadScene(sceneNr = 0){
+    loadScene(sceneNr = LevelEnum.intro){
         GAME_MANAGER.removeAllGameObjects();
         this.curScene = sceneNr;
         this.scenes[sceneNr]();
@@ -13,6 +20,15 @@ class SceneManager{
 
     reloadScene = ()=>{
         this.loadScene(this.curScene);
+    }
+
+    loadIntroScene(){
+        //TODO
+    }
+
+    loadTownScene(){
+        let player = new Player(0, 0, 64, 64);
+        GAME_MANAGER.instantiateGameObject(player);
     }
 
     loadFishingScene(){
