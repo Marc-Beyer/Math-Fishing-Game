@@ -5,10 +5,10 @@ class GameManager{
     _isActive = true;
 
     /**
-     * Starts the gameloop
+     * Starts the GameLoop
      */
     constructor(){
-        this.startGameloop();
+        this.startGameLoop();
     }
 
     get isActive() {
@@ -16,10 +16,10 @@ class GameManager{
     }
     set isActive(boolean) {
         this._isActive = boolean;
-        if(this._isActive) this.startGameloop();
+        if(this._isActive) this.startGameLoop();
     }
 
-    startGameloop(){
+    startGameLoop(){
         window.requestAnimationFrame((timestamp)=>{
             this.lastTimeStamp = timestamp;
             this.update(timestamp);
@@ -27,9 +27,9 @@ class GameManager{
     }
 
     /**
-     * Call the gameloop and request the AnimationFrame for update.
+     * Call the GameLoop and request the AnimationFrame for update.
      */
-    callGameloop(){
+    callGameLoop(){
         window.requestAnimationFrame((timestamp)=>{this.update(timestamp)});
     }
 
@@ -45,12 +45,12 @@ class GameManager{
         this.callUpdateOnAllGameObjects(deltaTime);
 
         // Recall loop
-        if(this.isActive) this.callGameloop();
+        if(this.isActive) this.callGameLoop();
     }
     
     /**
-     * Creates an Gameobject, adds it to the gameObjectContainer of the GAME_MANAGER
-     * and appands it to the gameFrame
+     * Creates an GameObject, adds it to the gameObjectContainer of the GAME_MANAGER
+     * and appends it to the gameFrame
      * @param {GameObject} gameObject
      */
     instantiateGameObject(gameObject){
@@ -69,6 +69,9 @@ class GameManager{
         }
     }
 
+    /**
+     * Removes all GameObjects from the DOM and the gameObjectContainer
+     */
     removeAllGameObjects(){
         for (const gameObject of this.gameObjectContainer) {
             gameObject.remove();

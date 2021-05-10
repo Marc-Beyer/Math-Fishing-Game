@@ -12,7 +12,7 @@ ___
 ## GameManager
 Has a list of GameObject and calls an 'update'-function every frame.
 
-The gameloop is only active if 'isActive: bool' is _true_.
+The game-loop is only active if 'isActive: bool' is _true_.
 ___
 ## UIManager
 Handles UI-interaction.
@@ -23,9 +23,9 @@ ___
 //TODO
 ___
 ## Input
-handles the input and calls the UIManager's 'toggleMenu'-function when escape is presed.
+handles the input and calls the UIManager's 'toggleMenu'-function when escape is pressed.
 
-This class provides some 'static' fields, that are fill by the user-inpus:
+This class provides some 'static' fields, that are fill by the user-inputs:
 
  - Input.prototype.left :           bool
  - Input.prototype.right :          bool
@@ -37,7 +37,7 @@ This class provides some 'static' fields, that are fill by the user-inpus:
                                         y: number
                                     }
  - Input.prototype.mouseScroll :   number;
-    - gets resetted after invoking or by user-input
+    - gets reset after invoking or by user-input
 
 ### example code:
 ```javascript
