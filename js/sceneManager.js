@@ -27,11 +27,16 @@ class SceneManager{
     }
 
     loadTownScene(){
+        let tileManager = new TileManager();
+        GAME_MANAGER.instantiateGameObject(tileManager);
+
         let player = new Player(0, 0, 64, 64);
         GAME_MANAGER.instantiateGameObject(player);
     }
 
     loadFishingScene(){
+        GAME_MANAGER.camPosX = 0;
+        GAME_MANAGER.camPosY = 0;
         // Spawn 
         let hook = new Hook(Environment.width/2, Environment.height/2, 16, 16)
         GAME_MANAGER.instantiateGameObject(new FishingController(hook));

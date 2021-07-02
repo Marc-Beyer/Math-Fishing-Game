@@ -30,10 +30,12 @@ function registerCustomElements(){
     customElements.define("game-object-hook", Hook);
     customElements.define("game-object-line", Line);
     customElements.define("game-object-player", Player);
+    customElements.define("game-object-tile", Tile);
+    customElements.define("game-object-tile-manager", TileManager);
 }
 
 /**
- * Sets the Envirement variable
+ * Sets the Environment variable
  */
 function setFrameSize(){
     boundingRect = GAME_FRAME.getBoundingClientRect();

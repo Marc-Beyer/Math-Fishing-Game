@@ -39,7 +39,7 @@ class GameObject extends HTMLElement{
     }
     set positionX(number) {
         this._positionX = number;
-        this.style.left = this._positionX * Environment.scale.x + Environment.offset.x + "px";
+        this.style.left = (this._positionX + Environment.offset.x) * Environment.scale.x + "px";
     }
     
     get positionY() {
@@ -47,7 +47,7 @@ class GameObject extends HTMLElement{
     }
     set positionY(number) {
         this._positionY = number;
-        this.style.top = this._positionY * Environment.scale.y + Environment.offset.y + "px";
+        this.style.top = (this._positionY + Environment.offset.y) * Environment.scale.y + "px";
     }
 
     get width() {

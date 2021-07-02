@@ -78,4 +78,32 @@ class GameManager{
         }
         this.gameObjectContainer = [];
     }
+
+    /**
+     * Set the Environment.offset.x and update the x-positions of all GameObjects 
+     */
+    set camPosX(number){
+        Environment.offset.x = number;
+        // Update x-positions of all GameObjects
+        for (const gameObject of this.gameObjectContainer) {
+            gameObject.positionX = gameObject.positionX;
+        }
+    }
+    get camPosX(){
+        return Environment.offset.x;
+    }
+
+    /**
+     * Set the Environment.offset.y and update the y-positions of all GameObjects 
+     */
+    set camPosY(number){
+        Environment.offset.y = number;
+        // Update y-positions of all GameObjects
+        for (const gameObject of this.gameObjectContainer) {
+            gameObject.positionY = gameObject.positionY;
+        }
+    }
+    get camPosY(){
+        return Environment.offset.y;
+    }
 }
