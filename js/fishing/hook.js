@@ -20,7 +20,7 @@ class Hook extends GameObject{
 
     
     /**
-     * Getter and Setter Overritten
+     * Getter and Setter Overwritten
      */
     get positionX() {
         return this._positionX;
@@ -95,6 +95,7 @@ class Hook extends GameObject{
     handleCollisionWithAFish(gameObject) {
         let isAnswerCorrect = FishingController.prototype.answer === gameObject.number;
         if (Fish.prototype.isSRising || isAnswerCorrect) {
+            // Answer is correct or all Fish are rising
             this.append(gameObject);
             gameObject.isActive = false;
             gameObject.isCollisionActive = false;
@@ -111,7 +112,8 @@ class Hook extends GameObject{
                 Fish.prototype.isSinking = false;
                 Fish.prototype.isSRising = true;
             }
-        }else{
+        }else{ 
+            // Answer is wrong
             gameObject.isCollisionActive = false;
             UI_MANAGER.showWrongMSG();
         }

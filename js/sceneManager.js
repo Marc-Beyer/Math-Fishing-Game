@@ -38,8 +38,9 @@ class SceneManager{
         GAME_MANAGER.camPosX = 0;
         GAME_MANAGER.camPosY = 0;
         // Spawn 
-        let hook = new Hook(Environment.width/2, Environment.height/2, 16, 16)
-        GAME_MANAGER.instantiateGameObject(new FishingController(hook));
+        let hook = new Hook(Environment.width/2, Environment.height/2, 16, 16);
+        let fishingController = new FishingController(hook);
+        GAME_MANAGER.instantiateGameObject(fishingController);
         GAME_MANAGER.instantiateGameObject(hook);
     
         // Spawn fish and bubbles

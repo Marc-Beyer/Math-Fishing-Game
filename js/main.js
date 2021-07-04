@@ -2,8 +2,9 @@
 const GAME_FRAME = document.querySelector("#game-frame");
 const GAME_MANAGER = new GameManager();
 const SCENE_MANAGER = new SceneManager();
-const UI_MANAGER = new UIManager;
+const UI_MANAGER = new UIManager();
 const INPUT = new Input();
+const AUDIO_MANAGER = new AudioManager();
 
 let boundingRect;
 let scale;
