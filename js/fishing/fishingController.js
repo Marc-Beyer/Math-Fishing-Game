@@ -1,11 +1,14 @@
 class FishingController extends GameObject{
 
     maxDepth = -20;
+    fishList = [];
+    bubbleList = [];
 
     constructor(hook, name = "FishingController"){
         super(0,0,0,0,name);
 
         this.hook = hook;
+        hook.FishingController = this;
 
         this.mathFieldElement = document.querySelector("#mathField");
         this.depthMeterElement = document.querySelector("#depthMeter");
@@ -25,6 +28,11 @@ class FishingController extends GameObject{
         Fish.prototype.isSRising = false;
         Fish.prototype.curNrTillCorrectAnswer = 5;
         Fish.prototype.nrTillCorrectAnswer = 7;
+
+        
+        UI_MANAGER.wrongIndicator.addEventListener("animationend", ()=>{
+            this.wrongIndicatorEnded();
+        });
     }
 
     // TODO 
@@ -40,7 +48,7 @@ class FishingController extends GameObject{
         if(Fish.prototype.isSinking || Fish.prototype.isSRising) 
             this.curDepth += Fish.prototype.sinkSpeed * 0.4;
 
-        this.depthMeterElement.textContent = Math.floor(this.curDepth);
+        //this.depthMeterElement.textContent = Math.floor(this.curDepth);
         this.depthMeterPointerElement.style.top = (this.curDepth / this.maxDepth) * 68 + 9 + "%";
 
         if(Fish.prototype.isSinking &&  Math.floor(this.curDepth) === this.maxDepth){
@@ -66,5 +74,24 @@ class FishingController extends GameObject{
         }
     }
 
+    wrongAnswerGiven(){
+        for (const fish of this.fishList) {
+            fish.isCollisionActive = false;
+            fish.swimSpeed += .2;
+            fish.changeSwimDirWhenOffscreen = false;
+            if(fish.positionX > Environment.width/2){
+                fish.swimDirection = 1;
+            }else{
+                fish.swimDirection = -1;
+            }
+        }
+    }
 
+    wrongIndicatorEnded(){
+        for (const fish of this.fishList) {
+            fish.isCollisionActive = true;
+            fish.changeSwimDirWhenOffscreen = true;
+            fish.randomizeFish();
+        }
+    }
 }

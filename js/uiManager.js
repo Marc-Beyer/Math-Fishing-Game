@@ -1,5 +1,6 @@
 class UIManager{
-isMenuOpen = false;
+
+    isMenuOpen = false;
 
     constructor(){
         this.menu = document.querySelector("#menu");
@@ -21,12 +22,12 @@ isMenuOpen = false;
 
     showWrongMSG(){
         this.wrongIndicator.classList.add("showAnimation");
-        GAME_MANAGER.isActive = false;
+        //GAME_MANAGER.isActive = false;
     }
 
     wrongMSGAnimationendHandler = (event)=>{
         this.wrongIndicator.classList.remove("showAnimation");
-        if(!this.isMenuOpen) GAME_MANAGER.isActive = true;
+        //if(!this.isMenuOpen) GAME_MANAGER.isActive = true;
     }
 
     toggleMenu = (event)=>{
@@ -40,9 +41,13 @@ isMenuOpen = false;
     }
 
     // src: https://developer.mozilla.org/en-US/docs/Web/API/Fullscreen_API
-    toggleFullScreen() {
+    async toggleFullScreen() {
         if (!document.fullscreenElement) {
-            document.documentElement.requestFullscreen();
+            // waiting for fullscreen
+            document.documentElement.requestFullscreen().then(()=>{
+                // Firefox doesn't trigger the resize-event correctly on changing to fullscreen
+                setFrameSize(true);
+            });
         } else {
             if (document.exitFullscreen) {
                 document.exitFullscreen();

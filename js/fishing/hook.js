@@ -13,6 +13,7 @@ class Hook extends GameObject{
     curYPositionAnimationState = 0;
 
     nrOfFishCaught = 0;
+    FishingController;
 
     constructor(posX, posY, width, height, name = "Hook"){
         super(posX, posY, width, height, name);
@@ -114,7 +115,8 @@ class Hook extends GameObject{
             }
         }else{ 
             // Answer is wrong
-            gameObject.isCollisionActive = false;
+            //gameObject.isCollisionActive = false;
+            this.FishingController.wrongAnswerGiven();
             UI_MANAGER.showWrongMSG();
         }
     }
