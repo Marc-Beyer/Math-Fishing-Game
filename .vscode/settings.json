@@ -4,5 +4,6 @@
         "haettenschweiler",
         "vollbild",
         "weiter"
-    ]
+    ],
+    "liveServer.settings.port": 5501
 }
