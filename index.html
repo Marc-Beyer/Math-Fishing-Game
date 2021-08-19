@@ -10,6 +10,7 @@
     <script src="./js/dictionary.js" defer></script>
 
     <script src="./js/input.js" defer></script>
+    <script src="./js/audioManager.js" defer></script>
     <script src="./js/gameObject.js" defer></script>
     
     <script src="./js/fishing/line.js" defer></script>
@@ -42,11 +43,11 @@
             <div id="wrongIndicator">FALSCH</div>
             <nav id="menu">
                 <h2>PAUSE</h2>
-                <ul>
-                    <li id="fullscreenBtn">Vollbild</li>
-                    <li id="restartBtn">Neu start</li>
-                    <li id="resumeBtn">Weiter</li>
-                </ul>
+                <div id="button-container">
+                    <button id="fullscreenBtn">Vollbild</button>
+                    <button id="restartBtn">Neu start</button>
+                    <button id="resumeBtn">Weiter</button>
+                </div>
             </nav>
             <!-- Inject GameObjects with scripts -->
         </div>

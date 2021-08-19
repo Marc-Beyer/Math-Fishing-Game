@@ -20,6 +20,8 @@ body{
 }
 
 img{
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-crisp-edges;
     image-rendering: pixelated;
     image-rendering: crisp-edges;
     width: 100%;
@@ -28,7 +30,7 @@ img{
 #game-container{
     width: 100%;
     height: 100%;
-    padding: 100px;
+    padding: 0;
 }
 
 #game-frame{
@@ -73,7 +75,7 @@ img{
     position: absolute;
     left: 1%;
     bottom: 1%;
-    width: 10%;
+    width: 5%;
     
     z-index: 1000;
 }
@@ -155,7 +157,7 @@ img{
     font-size: 4rem;
 }
 
-#menu ul{
+#menu #button-container{
     flex: 2;
     width: 50%;
     display: flex;
@@ -164,23 +166,35 @@ img{
     align-items: center;
 }
 
-#menu ul li{
+#menu #button-container button{
     width: 100%;
 
     margin-top: 5px;
     padding: 1em 2em;
 
-    list-style: none;
     color: var(--menu-color);
-    border: 2px solid var(--menu-color);
+    /*border: 2px solid var(--menu-color);*/
+    border: none;
+    background: url("../assets/textures/ui/Neustart-btn_48x16.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position-x: center;
+    image-rendering: crisp-edges;
+    
     text-align: center;
     font-size: 1.7rem;
 }
 
-#menu ul li:hover{
+#fullscreenBtn{
+    background: url("../assets/textures/ui/Vollbild-btn_48x16.png");
+}
+
+#menu button:hover{
     transition: .7s;
     background-color: var(--menu-color);
     color: rgb(31, 31, 31);
+
+    left: calc(50% - 50px);
 }
 
 /**

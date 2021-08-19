@@ -38,16 +38,17 @@ class SceneManager{
         GAME_MANAGER.camPosX = 0;
         GAME_MANAGER.camPosY = 0;
         // Spawn 
-        let hook = new Hook(Environment.width/2, Environment.height/2, 16, 16)
-        GAME_MANAGER.instantiateGameObject(new FishingController(hook));
+        let hook = new Hook(Environment.width/2, Environment.height/2, 16, 16);
+        let fishingController = new FishingController(hook);
+        GAME_MANAGER.instantiateGameObject(fishingController);
         GAME_MANAGER.instantiateGameObject(hook);
     
         // Spawn fish and bubbles
         for (let index = 0; index < 15; index++) {
-            GAME_MANAGER.instantiateGameObject(new Fish(Math.random()*Environment.width-18, Math.random()*Environment.height-9, 18, 9));
+            fishingController.fishList.push(GAME_MANAGER.instantiateGameObject(new Fish(Math.random()*Environment.width-18, Math.random()*Environment.height-9, 18, 9)));
         }
         for (let index = 0; index < 15; index++) {
-            GAME_MANAGER.instantiateGameObject(new Bubble(Math.random()*Environment.width-18, Math.random()*Environment.height-9, 18, 9));
+            fishingController.bubbleList.push(GAME_MANAGER.instantiateGameObject(new Bubble(Math.random()*Environment.width-18, Math.random()*Environment.height-9, 18, 9)));
         }
     }
 

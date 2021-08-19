@@ -13,6 +13,7 @@ class Hook extends GameObject{
     curYPositionAnimationState = 0;
 
     nrOfFishCaught = 0;
+    FishingController;
 
     constructor(posX, posY, width, height, name = "Hook"){
         super(posX, posY, width, height, name);
@@ -20,7 +21,7 @@ class Hook extends GameObject{
 
     
     /**
-     * Getter and Setter Overritten
+     * Getter and Setter Overwritten
      */
     get positionX() {
         return this._positionX;
@@ -95,6 +96,7 @@ class Hook extends GameObject{
     handleCollisionWithAFish(gameObject) {
         let isAnswerCorrect = FishingController.prototype.answer === gameObject.number;
         if (Fish.prototype.isSRising || isAnswerCorrect) {
+            // Answer is correct or all Fish are rising
             this.append(gameObject);
             gameObject.isActive = false;
             gameObject.isCollisionActive = false;
@@ -111,8 +113,10 @@ class Hook extends GameObject{
                 Fish.prototype.isSinking = false;
                 Fish.prototype.isSRising = true;
             }
-        }else{
-            gameObject.isCollisionActive = false;
+        }else{ 
+            // Answer is wrong
+            //gameObject.isCollisionActive = false;
+            this.FishingController.wrongAnswerGiven();
             UI_MANAGER.showWrongMSG();
         }
     }

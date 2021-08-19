@@ -1,11 +1,14 @@
 class FishingController extends GameObject{
 
     maxDepth = -20;
+    fishList = [];
+    bubbleList = [];
 
     constructor(hook, name = "FishingController"){
         super(0,0,0,0,name);
 
         this.hook = hook;
+        hook.FishingController = this;
 
         this.mathFieldElement = document.querySelector("#mathField");
         this.depthMeterElement = document.querySelector("#depthMeter");
@@ -17,7 +20,7 @@ class FishingController extends GameObject{
         FishingController.prototype.answer = answer;
 
         this.curDepth = 0;
-        this.refrashUI = true;
+        this.refreshUI = true;
 
         // Set static values
         Fish.prototype.sinkSpeed = -0.03;
@@ -25,13 +28,19 @@ class FishingController extends GameObject{
         Fish.prototype.isSRising = false;
         Fish.prototype.curNrTillCorrectAnswer = 5;
         Fish.prototype.nrTillCorrectAnswer = 7;
+
+        
+        UI_MANAGER.wrongIndicator.addEventListener("animationend", ()=>{
+            this.wrongIndicatorEnded();
+        });
     }
 
     // TODO 
+    // Update the UI
     update(deltaTime){
 
-        this.refrashUI = !this.refrashUI;
-        if(this.refrashUI) return;
+        this.refreshUI = !this.refreshUI;
+        if(this.refreshUI) return;
         
         let backgroundColor = Math.LerpRGBColor({r: 0, g: 149, b: 255}, {r: 6, g: 35, b: 142}, this.curDepth / this.maxDepth);
         GAME_FRAME.style.background = "rgb(" + backgroundColor.r + "," + backgroundColor.g + "," + backgroundColor.b + ")";
@@ -65,5 +74,24 @@ class FishingController extends GameObject{
         }
     }
 
+    wrongAnswerGiven(){
+        for (const fish of this.fishList) {
+            fish.isCollisionActive = false;
+            fish.swimSpeed += .2;
+            fish.changeSwimDirWhenOffscreen = false;
+            if(fish.positionX > Environment.width/2){
+                fish.swimDirection = 1;
+            }else{
+                fish.swimDirection = -1;
+            }
+        }
+    }
 
+    wrongIndicatorEnded(){
+        for (const fish of this.fishList) {
+            fish.isCollisionActive = true;
+            fish.changeSwimDirWhenOffscreen = true;
+            fish.randomizeFish();
+        }
+    }
 }

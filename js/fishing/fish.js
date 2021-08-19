@@ -1,6 +1,7 @@
 class Fish extends GameObject{
 
     swimSpeed = 0;
+    changeSwimDirWhenOffscreen = true;
     _swimDirection = -1;
 
     constructor(posX, posY, width, height, name = "Fish"){
@@ -69,7 +70,12 @@ class Fish extends GameObject{
         //transform.position += new Vector3(SwimSpeed * SwimDirection, -sinkSpeed + additionalSinkSpeed, 0) * Time.deltaTime;
         let isGettingOutOfScreenAtSides = this.positionX > Environment.width + 20 || this.positionX < - this.width - 20;
         if (isGettingOutOfScreenAtSides) {
-            this.swimDirection *= -1;
+            if(this.changeSwimDirWhenOffscreen){
+                this.swimDirection *= -1;
+            }else{
+                this.swimSpeed = 0;
+                return;
+            }
         }
         this.positionX += this.swimSpeed * this.swimDirection * deltaTime;
         this.positionY += Fish.prototype.sinkSpeed * deltaTime;

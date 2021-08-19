@@ -2,15 +2,16 @@
 const GAME_FRAME = document.querySelector("#game-frame");
 const GAME_MANAGER = new GameManager();
 const SCENE_MANAGER = new SceneManager();
-const UI_MANAGER = new UIManager;
+const UI_MANAGER = new UIManager();
 const INPUT = new Input();
+//const AUDIO_MANAGER = new AudioManager();
 
 let boundingRect;
 let scale;
 let Environment;
 
 // Add resize event listener and set the initial size
-window.addEventListener('resize', setFrameSize());
+window.addEventListener("resize", setFrameSize());
 setFrameSize();
 
 // Register customElements
@@ -37,9 +38,19 @@ function registerCustomElements(){
 /**
  * Sets the Environment variable
  */
-function setFrameSize(){
+function setFrameSize(isFullscreen = false){
     boundingRect = GAME_FRAME.getBoundingClientRect();
+
     console.log(boundingRect);
+    console.log(window.screen.width, window.screen.height);
+
+    console.log("document.fullscreenElement", document.fullscreenElement);
+    if(document.fullscreenElement || isFullscreen){
+        boundingRect.width = window.screen.width;
+        boundingRect.height = window.screen.height;
+        console.log("FULLSCREEN");
+    }
+
     scale = boundingRect.width/433;
     if(boundingRect.width < 800)
         scale = boundingRect.width/150;
