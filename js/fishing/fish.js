@@ -31,9 +31,9 @@ class Fish extends GameObject{
         }
 
         if(Fish.prototype.isSinking){
-            this.positionY = Environment.height + Math.random() * Environment.height;
+            this.positionY = Environment.height + Math.random() * Environment.height * 2;
         }else{
-            this.positionY = -this.height - Math.random() * Environment.height;
+            this.positionY = -this.height - Math.random() * Environment.height * 2;
         }
         this.positionX = Math.random() * Environment.width;
 

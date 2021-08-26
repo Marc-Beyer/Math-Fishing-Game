@@ -1,6 +1,7 @@
 class FishingController extends GameObject{
 
     maxDepth = -20;
+    hearts = 3;
     fishList = [];
     bubbleList = [];
 
@@ -11,8 +12,11 @@ class FishingController extends GameObject{
         hook.FishingController = this;
 
         this.mathFieldElement = document.querySelector("#mathField");
+        this.heartContainer = document.querySelector("#heart-container");
         this.depthMeterElement = document.querySelector("#depthMeter");
         this.depthMeterPointerElement = document.querySelector("#depthMeter-pointer");
+
+        this.heartContainer.style.width = this.hearts * 50 + "px";
 
         const[x, y, answer] = Math.getQuestion();
         this.mathFieldElement.innerText = (x + "+" + y + "= ?");
@@ -75,6 +79,13 @@ class FishingController extends GameObject{
     }
 
     wrongAnswerGiven(){
+        this.hearts--;
+        this.heartContainer.style.width = this.hearts * 50 + "px";
+        if(this.hearts <= 0){
+            // Game over
+            SCENE_MANAGER.reloadScene();
+        }
+
         for (const fish of this.fishList) {
             fish.isCollisionActive = false;
             fish.swimSpeed += .2;

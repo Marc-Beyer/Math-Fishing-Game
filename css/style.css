@@ -1,5 +1,5 @@
 *{
-    box-sizing: border-box;
+    box-sizing: border-box; 
     margin: 0;
     padding: 0;
 }
@@ -68,6 +68,38 @@ img{
     outline: .4rem solid black;
     font-size: 3rem;
 
+    z-index: 1000;
+}
+
+#open-menu{
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    height: 50px;
+    width: 50px;
+
+    margin: 20px;
+
+    z-index: 1000;
+}
+
+#heart-container{
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    height: 50px;
+    width: 150px;
+
+    margin: 20px;
+
+    background: url("../assets/textures/ui/heart_9x9.png");
+    background-size: contain;
+
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    
     z-index: 1000;
 }
 
@@ -175,26 +207,32 @@ img{
     color: var(--menu-color);
     /*border: 2px solid var(--menu-color);*/
     border: none;
-    background: url("../assets/textures/ui/Neustart-btn_48x16.png");
+
+    background: none;
     background-size: contain;
     background-repeat: no-repeat;
     background-position-x: center;
+    image-rendering: pixelated;
     image-rendering: crisp-edges;
     
     text-align: center;
     font-size: 1.7rem;
 }
 
-#fullscreenBtn{
-    background: url("../assets/textures/ui/Vollbild-btn_48x16.png");
+#menu #button-container #fullscreenBtn{
+    background-image: url("../assets/textures/ui/Vollbild-btn_48x16.png");
+}
+
+#menu #button-container #restartBtn{
+    background-image: url("../assets/textures/ui/Neustart-btn_48x16.png");
+}
+
+#menu #button-container #resumeBtn{
+    background-image: url("../assets/textures/ui/Weiter-btn_48x16.png");
 }
 
 #menu button:hover{
-    transition: .7s;
-    background-color: var(--menu-color);
-    color: rgb(31, 31, 31);
-
-    left: calc(50% - 50px);
+    image-rendering: auto;
 }
 
 /**
