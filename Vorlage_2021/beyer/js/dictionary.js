@@ -34,6 +34,21 @@ let FISH_DICTIONARY = [
         src: "./assets/textures/fish/seahorse_13x23.png",
         width: 13,
         height: 23
+    },
+    {
+        src: "./assets/textures/fish/fish_07-20x13.png",
+        width: 20,
+        height: 13
+    },
+    {
+        src: "./assets/textures/fish/jellyfish_01-18x17.gif",
+        width: 20,
+        height: 13
+    },
+    {
+        src: "./assets/textures/fish/jellyfish_02-18x17.gif",
+        width: 20,
+        height: 13
     }
     
 ];
@@ -41,18 +56,23 @@ let FISH_DICTIONARY = [
 // Container of all bubble texture-information
 let BUBBLE_DICTIONARY = [
     {
-        src: "./assets/textures/bubbles/Bubble_big.png",
+        src: "./assets/textures/bubbles/bubble_17x17.png",
         width: 17,
         height: 17
     },
     {
-        src: "./assets/textures/bubbles/Bubble_small.png",
-        width: 8,
-        height: 8
+        src: "./assets/textures/bubbles/bubble_6x6.png",
+        width: 6,
+        height: 6
     },
     {
-        src: "./assets/textures/bubbles/Bubble_small_01.png",
+        src: "./assets/textures/bubbles/bubble_4x4.png",
         width: 4,
         height: 4
+    },
+    {
+        src: "./assets/textures/bubbles/bubble_3x3.png",
+        width: 3,
+        height: 3
     }
 ];

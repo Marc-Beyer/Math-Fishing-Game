@@ -22,7 +22,7 @@ class FishingController extends GameObject{
      * @param {number} score 
      * @param {string} name 
      */
-    constructor(hook, score = 0, hearts = 1, name = "FishingController"){
+    constructor(hook, score = 0, hearts = 3, name = "FishingController"){
         super(0,0,0,0,name);
 
         this.score = score;
