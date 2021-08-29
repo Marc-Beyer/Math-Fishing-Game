@@ -1,7 +1,7 @@
 // Enum with all scenes
 const SceneEnum = Object.freeze({
     "intro": 0,
-    "town": 1,
+    "score": 1,
     "fishing": 2,
     "test": 3
 }); 
@@ -12,11 +12,14 @@ const SceneEnum = Object.freeze({
 class SceneManager{
 
     // Assign loading-functions to their correct position in the SceneEnum
-    scenes = [this.loadIntroScene, this.loadTownScene, this.loadFishingScene, this.loadTestScene];
+    scenes = [this.loadIntroScene, this.loadScoreScene, this.loadFishingScene, this.loadTestScene];
 
     // Set the startScene
     curScene = SceneEnum.intro;
 
+    /**
+     * Create a SceneManager
+     */
     constructor(){}
 
     /**
@@ -30,39 +33,83 @@ class SceneManager{
     }
 
     /**
+     * Load the handed scene and use parameter
+     * @param {number} sceneNr 
+     * @param {Object} parameter 
+     */
+    loadScene(sceneNr = SceneEnum.intro, parameter = {}){
+        GAME_MANAGER.removeAllGameObjects();
+        this.curScene = sceneNr;
+        this.scenes[sceneNr](parameter);
+        console.log(parameter);
+    }
+
+    /**
      * Reload the current scene
      */
-    reloadScene = ()=>{
-        this.loadScene(this.curScene);
+    reloadScene = (parameter = null)=>{
+        this.loadScene(this.curScene, parameter);
     }
 
     /**
      * Load the intro-scene
+     * @param
      */
-    loadIntroScene(){
-        //TODO
+    loadIntroScene(parameter = null){
+
+        UI_MANAGER.toggleTutorial(true);
+
+        let hook = new Hook(Environment.width/2, Environment.height/2, 16, 16);
+        hook.FishingController = {
+            tutorialCatch: () => {
+                Fish.prototype.sinkSpeed = 0;
+                hook.lastYPosition = hook.positionY;
+                hook.nextYPosition = hook.height -2;
+                hook.curYPositionAnimationState = 0;
+                hook.isYPositionControlledByScript = true;
+            },
+            finish: ()=>{
+                INPUT.addKeyListener();
+                UI_MANAGER.toggleTutorial(false);
+                SCENE_MANAGER.loadScene(SceneEnum.fishing);
+            }
+        }
+        FishingController.prototype.answer = "tutorial";
+
+        let fish = new Fish(0, 0, 0, 0);
+        fish.positionX = Environment.width/1.2;
+        fish.positionY = Environment.height/1.2;
+        fish.isActive = false;
+        fish.number = 20;
+        fish.text.textContent = "20";
+
+        GAME_MANAGER.instantiateGameObject(hook);
+        GAME_MANAGER.instantiateGameObject(fish);
     }
 
     /**
-     * Load the town-scene
+     * Load the score-scene
      */
-    loadTownScene(){
-        let tileManager = new TileManager();
-        GAME_MANAGER.instantiateGameObject(tileManager);
-
-        let player = new Player(0, 0, 64, 64);
-        GAME_MANAGER.instantiateGameObject(player);
+    loadScoreScene(parameter = null){
+        let scoreController = new ScoreController(parameter);
+        GAME_MANAGER.instantiateGameObject(scoreController);
     }
 
     /**
      * Load the fishing-scene
      */
-    loadFishingScene(){
+    loadFishingScene(parameter = null){
         GAME_MANAGER.camPosX = 0;
         GAME_MANAGER.camPosY = 0;
         // Spawn 
-        let hook = new Hook(Environment.width/2, Environment.height/2, 16, 16);
-        let fishingController = new FishingController(hook);
+        let hook = new Hook(Environment.width/2, -20, 16, 16);
+
+        let fishingController;
+        if(parameter?.score !== undefined && parameter?.hearts !== undefined){
+            fishingController = new FishingController(hook, parameter?.score, parameter?.hearts);
+        }else{
+            fishingController = new FishingController(hook);
+        }
         GAME_MANAGER.instantiateGameObject(fishingController);
         GAME_MANAGER.instantiateGameObject(hook);
     
@@ -78,7 +125,7 @@ class SceneManager{
     /**
      * Load the test-scene
      */
-    loadTestScene(){
+    loadTestScene(parameter = null){
         // Spawn 
         let hook = new Hook(Environment.width/2, Environment.height/2, 16, 16)
         GAME_MANAGER.instantiateGameObject(new FishingController(hook));

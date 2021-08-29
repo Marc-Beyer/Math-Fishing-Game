@@ -19,7 +19,23 @@ let FISH_DICTIONARY = [
         src: "./assets/textures/fish/fish_04-20x10.png",
         width: 20,
         height: 10
+    },
+    {
+        src: "./assets/textures/fish/fish_05-16x12.png",
+        width: 16,
+        height: 12
+    },
+    {
+        src: "./assets/textures/fish/fish_06-24x12.png",
+        width: 24,
+        height: 12
+    },
+    {
+        src: "./assets/textures/fish/seahorse_13x23.png",
+        width: 13,
+        height: 23
     }
+    
 ];
 
 // Container of all bubble texture-information

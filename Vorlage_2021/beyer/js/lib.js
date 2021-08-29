@@ -56,6 +56,16 @@ Math.randomIntRange = function(min, max){
 }
 
 /**
+ * Get a random number between min and max
+ * @param {number} min 
+ * @param {number} max 
+ * @returns {number} a random number between min and max
+ */
+ Math.randomRange = function(min, max){
+    return Math.random() * (max - min) + min;
+}
+
+/**
  * Get a MathQuestion as Array
  * @returns {[number, number, number]} a MathQuestion as Array
  */

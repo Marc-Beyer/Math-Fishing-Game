@@ -61,6 +61,36 @@ class UIManager{
     }
 
     /**
+     * Toggle the ScoreBoard
+     * @param {boolean} value 
+     */
+    toggleScoreBoard(value){
+        if(value){
+            document.querySelector("#score-board").classList.remove("hidden");
+        }else{
+            document.querySelector("#score-board").classList.add("hidden");
+        }
+
+        document.querySelector("#open-menu").hidden = value;
+        document.querySelector("#depthMeter").hidden = value;
+    }
+
+    /**
+     * Toggle the Tutorial
+     * @param {boolean} value 
+     */
+    toggleTutorial(value){
+        if(value){
+            document.querySelector("#tutorial").classList.remove("hidden");
+        }else{
+            document.querySelector("#tutorial").classList.add("hidden");
+        }
+
+        document.querySelector("#open-menu").hidden = value;
+        document.querySelector("#depthMeter").hidden = value;
+    }
+
+    /**
      * Turns fullscreen on and off
      * src: https://developer.mozilla.org/en-US/docs/Web/API/Fullscreen_API
      */

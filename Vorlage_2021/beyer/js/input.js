@@ -20,13 +20,26 @@ class Input {
 
         Input.prototype.offsetX = GAME_FRAME.getBoundingClientRect().x;
         Input.prototype.offsetY = GAME_FRAME.getBoundingClientRect().y;
-
-        window.addEventListener("keydown", Input.prototype.keyDownHandler, true);
-        window.addEventListener("keyup", Input.prototype.keyUpHandler, true);
         
         GAME_FRAME.addEventListener("mousemove", Input.prototype.mousemoveHandler, true);
         GAME_FRAME.addEventListener("touchmove", Input.prototype.touchmoveHandler, false);
         GAME_FRAME.addEventListener("wheel", Input.prototype.mouseWheelHandler, true);
+    }
+
+    /**
+     * Add keyUp and keyDown Listener
+     */
+    addKeyListener(){
+        window.addEventListener("keydown", Input.prototype.keyDownHandler, true);
+        window.addEventListener("keyup", Input.prototype.keyUpHandler, true);
+    }
+
+    /**
+     * Remove keyUp and keyDown Listener
+     */
+    removeKeyListener(){
+        window.removeEventListener("keydown", Input.prototype.keyDownHandler, true);
+        window.removeEventListener("keyup", Input.prototype.keyUpHandler, true);
     }
 
     // Getter and Setter for mouseScroll

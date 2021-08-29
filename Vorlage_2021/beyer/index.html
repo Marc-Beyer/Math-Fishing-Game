@@ -20,10 +20,8 @@
     <script src="./js/fishing/fish.js" defer></script>
     <script src="./js/fishing/bubble.js" defer></script>
     <script src="./js/fishing/fishingController.js" defer></script>
-
-    <script src="./js/town/player.js" defer></script>
-    <script src="./js/town/tile.js" defer></script>
-    <script src="./js/town/tileManager.js" defer></script>
+    
+    <script src="./js/score/scoreController.js" defer></script>
 
     <script src="./js/gameManager.js" defer></script>
     <script src="./js/sceneManager.js" defer></script>
@@ -38,7 +36,7 @@
         <div id="game-frame">
 
             <!-- The question-element -->
-            <div id="mathField">11 + 23 = ?</div>
+            <div id="mathField">10 + 10 = ?</div>
 
             <!-- The indicator how many lives you have left -->
             <div id="heart-container"></div>
@@ -55,6 +53,29 @@
 
             <!-- The menu-button -->
             <button id="open-menu"></button>
+
+            <!-- The scoreboard -->
+            <div id="score-board" class="hidden">
+                <h1>HIGHSCORES</h1>
+                <input id="score-board-input" type="text" placeholder="Gib deinen Namen ein" maxlength="15">
+                <button id="score-board-button">Deinen Score Eintragen</button>
+                <table id="score-board-table">
+                </table>
+            </div>
+
+            <!-- The tutorial -->
+            <div id="tutorial">
+                <div>
+                    <img src="./assets/textures/ui/tutorial-1.png" alt="">
+                    <p>
+                        Bewege die Maus um den Angelharken nach link und rechts zu bewegen.
+                        <br>
+                        <br>
+                        <br>
+                        Nutze das Mausrad um den Angelharken nach oben und unten zu bewegen.
+                    </p>
+                </div>
+            </div>
             
             <!-- the menu -->
             <nav id="menu">

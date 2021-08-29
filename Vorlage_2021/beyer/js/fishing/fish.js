@@ -1,9 +1,25 @@
+/**
+ * Fish-gameObject
+ */
 class Fish extends GameObject{
 
+    // Speed the fish moves left to right
     swimSpeed = 0;
+
+    // Should the fish change the direction if it is out of the screen
     changeSwimDirWhenOffscreen = true;
+
+    // The current direction(left/right) the fish is moving
     _swimDirection = -1;
 
+    /**
+     * Create a fish-gmeObject
+     * @param {number} posX 
+     * @param {number} posY 
+     * @param {number} width 
+     * @param {number} height 
+     * @param {string} name 
+     */
     constructor(posX, posY, width, height, name = "Fish"){
         super(posX, posY, width, height, name);
 
@@ -11,6 +27,7 @@ class Fish extends GameObject{
         this.isCollisionActive = true;
     }
 
+    // Getter and setter for swimDirection
     get swimDirection() {
         return this._swimDirection;
     }
@@ -20,8 +37,10 @@ class Fish extends GameObject{
         this.text.style.transform = "scaleX(" + (-this.swimDirection) + ")";
     }
 
-    // Reuse the fish-GameObject
-    // Set new values and move to the other side of the screen
+    /**
+     * Reuse the fish-GameObject
+     * Set new values and move to the other side of the screen
+     */
     randomizeFish(){
         this.swimSpeed = Math.random() * 0.05 + 0.01;
         if(Math.random() >= 0.5){
@@ -40,6 +59,7 @@ class Fish extends GameObject{
         let rdmNr = Math.randomInt(FISH_DICTIONARY.length - 1);
         
         this.img.src = FISH_DICTIONARY[rdmNr].src;
+        this.img.alt = "fish";
         this.width = FISH_DICTIONARY[rdmNr].width;
         this.height = FISH_DICTIONARY[rdmNr].height;
         
@@ -55,7 +75,11 @@ class Fish extends GameObject{
         this.isCollisionActive = true;
     }
 
-    // overwrite method
+    /**
+     * Is called in the constructor
+     * Create your DOMElements here
+     * @override
+     */
     createDOMElement(){
         this.img = document.createElement("img");
         this.text = document.createElement("p");
@@ -64,8 +88,12 @@ class Fish extends GameObject{
         this.append(this.text);
         this.append(this.img);
     }
-
-    // overwrite method
+    
+    /**
+     * Is called every frame
+     * @param {number} deltaTime the time passed since last frame. 
+     * @override
+     */
     update(deltaTime){
         //transform.position += new Vector3(SwimSpeed * SwimDirection, -sinkSpeed + additionalSinkSpeed, 0) * Time.deltaTime;
         let isGettingOutOfScreenAtSides = this.positionX > Environment.width + 20 || this.positionX < - this.width - 20;
@@ -93,7 +121,7 @@ class Fish extends GameObject{
 }
 
 // "Static" variables
-Fish.prototype.sinkSpeed = -0.03;
+Fish.prototype.sinkSpeed = -0.02;
 Fish.prototype.isSinking = true;
 Fish.prototype.isSRising = false;
 

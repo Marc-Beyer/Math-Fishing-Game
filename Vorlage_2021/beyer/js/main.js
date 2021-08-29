@@ -19,7 +19,7 @@ setFrameSize();
 registerCustomElements();
 
 // Load the first scene
-SCENE_MANAGER.loadScene(SceneEnum.fishing);
+SCENE_MANAGER.loadScene(SceneEnum.intro);
 
 /**
  * Registers all custom elements
@@ -31,9 +31,7 @@ function registerCustomElements(){
     customElements.define("game-object-bubble", Bubble);
     customElements.define("game-object-hook", Hook);
     customElements.define("game-object-line", Line);
-    customElements.define("game-object-player", Player);
-    customElements.define("game-object-tile", Tile);
-    customElements.define("game-object-tile-manager", TileManager);
+    customElements.define("game-object-score-controller", ScoreController);
 }
 
 /**
@@ -42,21 +40,16 @@ function registerCustomElements(){
 function setFrameSize(isFullscreen = false){
     boundingRect = GAME_FRAME.getBoundingClientRect();
 
-    console.log(boundingRect);
-    console.log(window.screen.width, window.screen.height);
-
-    console.log("document.fullscreenElement", document.fullscreenElement);
     if(document.fullscreenElement || isFullscreen){
         boundingRect.width = window.screen.width;
         boundingRect.height = window.screen.height;
-        console.log("FULLSCREEN");
     }
 
     scale = boundingRect.width/433;
     if(boundingRect.width < 800)
         scale = boundingRect.width/150;
 
-        // Set the Environment.Object
+    // Set the Environment.Object
     Environment = {
         offset: {
             x: 0,

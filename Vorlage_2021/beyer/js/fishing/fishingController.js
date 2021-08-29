@@ -1,12 +1,32 @@
+/**
+ * FishingController-gameObject
+ * Controls the game-logic in the fishing scene
+ */
 class FishingController extends GameObject{
 
-    maxDepth = -20;
+    // The max depth a player can reach
+    maxDepth = -100;
+
+    // The number of lives a player has
     hearts = 3;
+
+    // All fish in the scene
     fishList = [];
+
+    // All bubble in the scene
     bubbleList = [];
 
-    constructor(hook, name = "FishingController"){
+    /**
+     * Create a FishingController-gameObject
+     * @param {Hook} hook 
+     * @param {number} score 
+     * @param {string} name 
+     */
+    constructor(hook, score = 0, hearts = 1, name = "FishingController"){
         super(0,0,0,0,name);
+
+        this.score = score;
+        this.hearts = hearts;
 
         this.hook = hook;
         hook.FishingController = this;
@@ -19,7 +39,7 @@ class FishingController extends GameObject{
         this.heartContainer.style.width = this.hearts * 50 + "px";
 
         const[x, y, answer] = Math.getQuestion();
-        this.mathFieldElement.innerText = (x + "+" + y + "= ?");
+        this.mathFieldElement.innerText = (`${x} + ${y} = ?`);
 
         FishingController.prototype.answer = answer;
 
@@ -27,7 +47,7 @@ class FishingController extends GameObject{
         this.refreshUI = true;
 
         // Set static values
-        Fish.prototype.sinkSpeed = -0.03;
+        Fish.prototype.sinkSpeed = -0.02;
         Fish.prototype.isSinking = true;
         Fish.prototype.isSRising = false;
         Fish.prototype.curNrTillCorrectAnswer = 5;
@@ -38,9 +58,13 @@ class FishingController extends GameObject{
             this.wrongIndicatorEnded();
         });
     }
-
-    // TODO 
-    // Update the UI
+    
+    /**
+     * Is called every frame
+     * Update the UI
+     * @param {number} deltaTime the time passed since last frame. 
+     * @override
+     */
     update(deltaTime){
 
         this.refreshUI = !this.refreshUI;
@@ -52,7 +76,6 @@ class FishingController extends GameObject{
         if(Fish.prototype.isSinking || Fish.prototype.isSRising) 
             this.curDepth += Fish.prototype.sinkSpeed * 0.4;
 
-        //this.depthMeterElement.textContent = Math.floor(this.curDepth);
         this.depthMeterPointerElement.style.top = (this.curDepth / this.maxDepth) * 68 + 9 + "%";
 
         if(Fish.prototype.isSinking &&  Math.floor(this.curDepth) === this.maxDepth){
@@ -72,18 +95,24 @@ class FishingController extends GameObject{
                     Fish.prototype.isSRising = false;
                     Fish.prototype.isSinking = false;
                     Fish.prototype.sinkSpeed = 0;
-                    SCENE_MANAGER.loadScene(SceneEnum.fishing);
+                    SCENE_MANAGER.loadScene(SceneEnum.fishing, {score:this.score + this.hook.nrOfFishCaught, hearts:this.hearts});
                 }
             }
         }
     }
 
+    /**
+     * Called when the player chooses a wrong answer
+     * Check if the player has lost all hearts
+     * Let all fish leave the screen
+     */
     wrongAnswerGiven(){
         this.hearts--;
         this.heartContainer.style.width = this.hearts * 50 + "px";
         if(this.hearts <= 0){
             // Game over
-            SCENE_MANAGER.reloadScene();
+            this.mathFieldElement.innerText = this.mathFieldElement.innerText.substring(0, this.mathFieldElement.innerText.length - 1) + FishingController.prototype.answer;
+            SCENE_MANAGER.loadScene(SceneEnum.score, {score:this.score + this.hook.nrOfFishCaught});
         }
 
         for (const fish of this.fishList) {
@@ -98,6 +127,9 @@ class FishingController extends GameObject{
         }
     }
 
+    /**
+     * Is called when the wrongIndicator-animation ended
+     */
     wrongIndicatorEnded(){
         for (const fish of this.fishList) {
             fish.isCollisionActive = true;

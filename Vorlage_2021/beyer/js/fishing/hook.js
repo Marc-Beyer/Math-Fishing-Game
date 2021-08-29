@@ -1,18 +1,24 @@
+/**
+ * Hook-gameObject
+ */
 class Hook extends GameObject{
 
+    // Control-variables for the movement-behavior
     anchorPointX = 0;
-    anchorPointMoveingSpeed = 0.01;
+    anchorPointMovingSpeed = 0.01;
     anchorPointMaxSmoothSpeed = 1;
     hookSmoothingVelocityX = 0.01;
     curHookVelocityX = 0;
-
     isYPositionControlledByScript = true;
     nextYPosition = Environment.height/2;
     lastYPosition = 0;
     yPositionAnimationFactor = 0.001;
     curYPositionAnimationState = 0;
 
+    // The nr of fish the player has caught currently
     nrOfFishCaught = 0;
+
+    // A reference to the FishingController
     FishingController;
 
     constructor(posX, posY, width, height, name = "Hook"){
@@ -20,9 +26,7 @@ class Hook extends GameObject{
     }
 
     
-    /**
-     * Getter and Setter Overwritten
-     */
+    // Getter and Setter Overwritten
     get positionX() {
         return this._positionX;
     }
@@ -31,9 +35,15 @@ class Hook extends GameObject{
         this.style.left = this._positionX * Environment.scale.x + "px";
     }
 
+    /**
+     * Is called in the constructor
+     * Create your DOMElements here
+     * @override
+     */
     createDOMElement(){
         let img = document.createElement("img");
         img.src = "./assets/textures/hook-16x16.png";
+        img.alt = "hook";
         this.append(img);
         
         // Create the line GameObject
@@ -42,6 +52,11 @@ class Hook extends GameObject{
         GAME_MANAGER.gameObjectContainer.push(line);
     }
 
+    /**
+     * Is called every frame
+     * @param {number} deltaTime the time passed since last frame. 
+     * @override
+     */
     update(deltaTime){
 
         this.calcYPosition(deltaTime);
@@ -49,19 +64,33 @@ class Hook extends GameObject{
         this.smoothAnchorPoint(deltaTime);
     }
 
+    /**
+     * Calculate the y-position
+     * @param {number} deltaTime 
+     */
     calcYPosition(deltaTime) {
         if(this.isYPositionControlledByScript){
             this.curYPositionAnimationState += deltaTime * this.yPositionAnimationFactor;
             this.positionY = Math.lerp(this.lastYPosition, this.nextYPosition, this.curYPositionAnimationState);
-            if(!Fish.prototype.isSRising && this.curYPositionAnimationState >= 1){
-                this.curYPositionAnimationState = 1;
-                this.isYPositionControlledByScript = false;
+
+            if(this.curYPositionAnimationState >= 1){
+                if(!Fish.prototype.isSRising){
+                    this.curYPositionAnimationState = 1;
+                    this.isYPositionControlledByScript = false;
+                }else if(FishingController.prototype.answer === "tutorial"){
+                    this.FishingController.finish();
+                }
             }
+            
         }else{
             this.positionY = Math.clamp(this.positionY + INPUT.mouseScroll * deltaTime, 10, Environment.height - this.height - 10);
         }
     }
 
+    /**
+     * Smooth the hook-movement
+     * @param {number} deltaTime 
+     */
     smoothAnchorPoint(deltaTime) {
         let threshold = 10;
         this.anchorPointX = INPUT.mousePosition.x;
@@ -86,6 +115,10 @@ class Hook extends GameObject{
         this.positionX += this.curHookVelocityX;
     }
 
+    /**
+     * handle a collision with a gameObject
+     * @param {GameObject} gameObject 
+     */
     handleCollision(gameObject) {
         let isFish = gameObject instanceof Fish;
         if (isFish) {
@@ -93,10 +126,23 @@ class Hook extends GameObject{
         }
     }
 
+    /**
+     * handle a collision with a fish-gameObject
+     * @param {Fish} gameObject 
+     */
     handleCollisionWithAFish(gameObject) {
         let isAnswerCorrect = FishingController.prototype.answer === gameObject.number;
+
+        if(FishingController.prototype.answer === "tutorial"){
+            Fish.prototype.isSRising = true;
+            this.FishingController.tutorialCatch();
+            isAnswerCorrect = true;
+        }
+
         if (Fish.prototype.isSRising || isAnswerCorrect) {
             // Answer is correct or all Fish are rising
+            this.nrOfFishCaught++;
+
             this.append(gameObject);
             gameObject.isActive = false;
             gameObject.isCollisionActive = false;
@@ -115,7 +161,6 @@ class Hook extends GameObject{
             }
         }else{ 
             // Answer is wrong
-            //gameObject.isCollisionActive = false;
             this.FishingController.wrongAnswerGiven();
             UI_MANAGER.showWrongMSG();
         }
