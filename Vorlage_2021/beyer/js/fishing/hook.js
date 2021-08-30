@@ -74,7 +74,7 @@ class Hook extends GameObject{
             this.positionY = Math.lerp(this.lastYPosition, this.nextYPosition, this.curYPositionAnimationState);
 
             if(this.curYPositionAnimationState >= 1){
-                if(!Fish.prototype.isSRising){
+                if(!Fish.prototype.isRising){
                     this.curYPositionAnimationState = 1;
                     this.isYPositionControlledByScript = false;
                 }else if(FishingController.prototype.answer === "tutorial"){
@@ -134,12 +134,16 @@ class Hook extends GameObject{
         let isAnswerCorrect = FishingController.prototype.answer === gameObject.number;
 
         if(FishingController.prototype.answer === "tutorial"){
-            Fish.prototype.isSRising = true;
+            Fish.prototype.isRising = true;
             this.FishingController.tutorialCatch();
             isAnswerCorrect = true;
         }
 
-        if (Fish.prototype.isSRising || isAnswerCorrect) {
+        if(isAnswerCorrect && Fish.prototype.isSinking){
+            this.FishingController.reachedDepth = this.FishingController.curDepth;
+        }
+
+        if (Fish.prototype.isRising || isAnswerCorrect) {
             // Answer is correct or all Fish are rising
             this.nrOfFishCaught++;
 
@@ -154,10 +158,10 @@ class Hook extends GameObject{
             gameObject.style.transform = "rotateZ(" + rdmFishRotation + "deg) translate(" + fishOffset + "px)";
             gameObject.text.style.display = "none";
 
-            if (Fish.prototype.isSinking || !Fish.prototype.isSRising) {
+            if (Fish.prototype.isSinking || !Fish.prototype.isRising) {
                 Fish.prototype.sinkSpeed = 0.1;
                 Fish.prototype.isSinking = false;
-                Fish.prototype.isSRising = true;
+                Fish.prototype.isRising = true;
             }
         }else{ 
             // Answer is wrong

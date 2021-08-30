@@ -113,7 +113,7 @@ class Fish extends GameObject{
             this.randomizeFish();
         }
 
-        let isGettingOutOfScreenAtBottom = Fish.prototype.isSRising && this.positionY > Environment.height;
+        let isGettingOutOfScreenAtBottom = Fish.prototype.isRising && this.positionY > Environment.height;
         if (isGettingOutOfScreenAtBottom) {
             this.randomizeFish();
         }
@@ -123,7 +123,7 @@ class Fish extends GameObject{
 // "Static" variables
 Fish.prototype.sinkSpeed = -0.02;
 Fish.prototype.isSinking = true;
-Fish.prototype.isSRising = false;
+Fish.prototype.isRising = false;
 
 Fish.prototype.curNrTillCorrectAnswer = 5;
 Fish.prototype.nrTillCorrectAnswer = 7;

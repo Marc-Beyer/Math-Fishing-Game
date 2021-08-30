@@ -106,7 +106,7 @@ class SceneManager{
 
         let fishingController;
         if(parameter?.score !== undefined && parameter?.hearts !== undefined){
-            fishingController = new FishingController(hook, parameter?.score, parameter?.hearts);
+            fishingController = new FishingController(hook, parameter?.score, parameter?.hearts, parameter?.curDepth);
         }else{
             fishingController = new FishingController(hook);
         }

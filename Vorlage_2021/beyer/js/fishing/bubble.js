@@ -36,7 +36,7 @@ class Bubble extends GameObject{
     randomizeBubble(){
         this.risingSpeed = Math.randomRange(Bubble.prototype.minSinkSpeed, Bubble.prototype.maxSinkSpeed);
 
-        if(Fish.prototype.isSinking || !Fish.prototype.isSRising){
+        if(Fish.prototype.isSinking || !Fish.prototype.isRising){
             this.positionY = Environment.height + Math.random() * Environment.height;
         }else{
             this.positionY = -this.height - Math.random() * Environment.height;
@@ -60,12 +60,12 @@ class Bubble extends GameObject{
         
         this.positionY += (Fish.prototype.sinkSpeed - this.risingSpeed) * deltaTime;
 
-        let isGettingOutOfScreenAtTop = (Fish.prototype.isSinking || !Fish.prototype.isSRising) && this.positionY < - this.height - 20;
+        let isGettingOutOfScreenAtTop = (Fish.prototype.isSinking || !Fish.prototype.isRising) && this.positionY < - this.height - 20;
         if (isGettingOutOfScreenAtTop) {
             this.randomizeBubble();
         }
 
-        let isGettingOutOfScreenAtBottom = Fish.prototype.isSRising && this.positionY > Environment.height;
+        let isGettingOutOfScreenAtBottom = Fish.prototype.isRising && this.positionY > Environment.height;
         if (isGettingOutOfScreenAtBottom) {
             this.randomizeBubble();
         }

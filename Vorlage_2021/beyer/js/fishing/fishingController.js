@@ -5,7 +5,10 @@
 class FishingController extends GameObject{
 
     // The max depth a player can reach
-    maxDepth = -100;
+    maxDepth = -50;
+
+    // The max depth a player reached
+    reachedDepth = 0;
 
     // The number of lives a player has
     hearts = 3;
@@ -22,7 +25,7 @@ class FishingController extends GameObject{
      * @param {number} score 
      * @param {string} name 
      */
-    constructor(hook, score = 0, hearts = 3, name = "FishingController"){
+    constructor(hook, score = 0, hearts = 3, curDepth = 0, name = "FishingController"){
         super(0,0,0,0,name);
 
         this.score = score;
@@ -43,13 +46,13 @@ class FishingController extends GameObject{
 
         FishingController.prototype.answer = answer;
 
-        this.curDepth = 0;
+        this.curDepth = curDepth;
         this.refreshUI = true;
 
         // Set static values
         Fish.prototype.sinkSpeed = -0.02;
         Fish.prototype.isSinking = true;
-        Fish.prototype.isSRising = false;
+        Fish.prototype.isRising = false;
         Fish.prototype.curNrTillCorrectAnswer = 5;
         Fish.prototype.nrTillCorrectAnswer = 7;
 
@@ -57,6 +60,10 @@ class FishingController extends GameObject{
         UI_MANAGER.wrongIndicator.addEventListener("animationend", ()=>{
             this.wrongIndicatorEnded();
         });
+
+        this.ground = new Ground();
+        this.ground.isActive = false;
+        GAME_MANAGER.instantiateGameObject(this.ground);
     }
     
     /**
@@ -73,17 +80,24 @@ class FishingController extends GameObject{
         let backgroundColor = Math.lerpRGBColor({r: 0, g: 149, b: 255}, {r: 6, g: 35, b: 142}, this.curDepth / this.maxDepth);
         GAME_FRAME.style.background = "rgb(" + backgroundColor.r + "," + backgroundColor.g + "," + backgroundColor.b + ")";
         
-        if(Fish.prototype.isSinking || Fish.prototype.isSRising) 
+        if(Fish.prototype.isSinking || Fish.prototype.isRising) 
             this.curDepth += Fish.prototype.sinkSpeed * 0.4;
 
         this.depthMeterPointerElement.style.top = (this.curDepth / this.maxDepth) * 68 + 9 + "%";
 
-        if(Fish.prototype.isSinking &&  Math.floor(this.curDepth) === this.maxDepth){
-            Fish.prototype.sinkSpeed = 0;
-            Fish.prototype.isSinking = false;
+        
+        if(Fish.prototype.isSinking &&  this.curDepth <= this.maxDepth + 3){
+            this.ground.isActive = true;
         }
 
-        if(Fish.prototype.isSRising && this.curDepth >= 0){
+        if(Fish.prototype.isSinking &&  this.curDepth <= this.maxDepth){
+            Fish.prototype.sinkSpeed = 0;
+            Fish.prototype.isSinking = false;
+            
+            //SCENE_MANAGER.loadScene(SceneEnum.score, {score:this.score + this.hook.nrOfFishCaught});
+        }
+
+        if(Fish.prototype.isRising && this.curDepth >= 0){
             if(Fish.prototype.sinkSpeed > 0){
                 Fish.prototype.sinkSpeed = 0;
                 this.hook.lastYPosition = this.hook.positionY;
@@ -92,10 +106,14 @@ class FishingController extends GameObject{
                 this.hook.isYPositionControlledByScript = true;
             }else{
                 if(this.hook.curYPositionAnimationState > 1){
-                    Fish.prototype.isSRising = false;
+                    Fish.prototype.isRising = false;
                     Fish.prototype.isSinking = false;
                     Fish.prototype.sinkSpeed = 0;
-                    SCENE_MANAGER.loadScene(SceneEnum.fishing, {score:this.score + this.hook.nrOfFishCaught, hearts:this.hearts});
+                    SCENE_MANAGER.loadScene(SceneEnum.fishing, {
+                        score: this.score + this.hook.nrOfFishCaught,
+                        hearts: this.hearts,
+                        curDepth: this.reachedDepth
+                    });
                 }
             }
         }

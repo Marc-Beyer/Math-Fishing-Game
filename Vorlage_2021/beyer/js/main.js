@@ -32,6 +32,7 @@ function registerCustomElements(){
     customElements.define("game-object-hook", Hook);
     customElements.define("game-object-line", Line);
     customElements.define("game-object-score-controller", ScoreController);
+    customElements.define("game-object-ground", Ground);
 }
 
 /**

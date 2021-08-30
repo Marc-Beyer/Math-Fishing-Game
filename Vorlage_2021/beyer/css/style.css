@@ -295,6 +295,7 @@ p{
 
 #menu #button-container button{
     width: 100%;
+    height: 10vh;
 
     margin-top: 5px;
     padding: 1em 2em;
@@ -312,6 +313,11 @@ p{
     
     text-align: center;
     font-size: 1.7rem;
+}
+
+
+#menu #button-container button:hover{
+    opacity: 0.6;
 }
 
 #menu #button-container #fullscreenBtn{
