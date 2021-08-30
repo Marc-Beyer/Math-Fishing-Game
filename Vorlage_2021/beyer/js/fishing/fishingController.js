@@ -5,7 +5,7 @@
 class FishingController extends GameObject{
 
     // The max depth a player can reach
-    maxDepth = -50;
+    maxDepth = -5;
 
     // The max depth a player reached
     reachedDepth = 0;
@@ -86,15 +86,15 @@ class FishingController extends GameObject{
         this.depthMeterPointerElement.style.top = (this.curDepth / this.maxDepth) * 68 + 9 + "%";
 
         
-        if(Fish.prototype.isSinking &&  this.curDepth <= this.maxDepth + 3){
+        if(!this.dontActivateGround && Fish.prototype.isSinking && this.curDepth <= this.maxDepth + 3){
             this.ground.isActive = true;
+            this.ground.spawnChests();
+            this.dontActivateGround = true;
         }
 
-        if(Fish.prototype.isSinking &&  this.curDepth <= this.maxDepth){
+        if(Fish.prototype.isSinking && this.curDepth <= this.maxDepth){
             Fish.prototype.sinkSpeed = 0;
             Fish.prototype.isSinking = false;
-            
-            //SCENE_MANAGER.loadScene(SceneEnum.score, {score:this.score + this.hook.nrOfFishCaught});
         }
 
         if(Fish.prototype.isRising && this.curDepth >= 0){

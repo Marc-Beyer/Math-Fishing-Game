@@ -122,7 +122,17 @@ class Hook extends GameObject{
     handleCollision(gameObject) {
         let isFish = gameObject instanceof Fish;
         if (isFish) {
-            this.handleCollisionWithAFish(gameObject);
+            if(gameObject.isChest){
+                let isAnswerCorrect = FishingController.prototype.answer === gameObject.number;
+
+                if(isAnswerCorrect){
+                    this.nrOfFishCaught += 2;
+                }
+
+                SCENE_MANAGER.loadScene(SceneEnum.score, {score:this.FishingController.score + this.nrOfFishCaught});
+            }else{
+                this.handleCollisionWithAFish(gameObject);
+            }
         }
     }
 
