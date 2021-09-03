@@ -4,7 +4,7 @@
 class Ground extends GameObject{
 
     // The final position of the ground
-    finalXPosition = -35;
+    finalXPosition = -36.4375;
 
     // Chest at the ground
     chests = [];
@@ -17,6 +17,8 @@ class Ground extends GameObject{
      */
      constructor(){
         super(0, 200, 433, 280, "ground");
+
+        this.finalXPosition = -(Environment.scale.y * 280 - Environment.realHeight) / Environment.scale.y;
     }
 
     /**
@@ -54,24 +56,24 @@ class Ground extends GameObject{
         this.spawnChest(Environment.width/4 * 3, Math.randomIntRange(0, 100));
     }
 
-        /**
+    /**
      * Spawn a chest
      */
-         spawnChest(xPos, answer){
-            let fish = new Fish(0, 0, 0, 0, "Chest");
-            fish.positionX = xPos;
-            fish.positionY = this.positionY + 250;
-            fish.width = 17;
-            fish.height = 16;
-            fish.number = answer;
-            fish.swimSpeed = 0;
-            fish.text.textContent = answer;
-            fish.img.src = "./assets/textures/chest_21x16.png";
-            fish.img.alt = "chest";
-            fish.isActive = false;
-            fish.isChest = true;
+    spawnChest(xPos, answer){
+        let fish = new Fish(0, 0, 0, 0, "Chest");
+        fish.positionX = xPos;
+        fish.positionY = this.positionY + 250;
+        fish.width = 17;
+        fish.height = 16;
+        fish.number = answer;
+        fish.swimSpeed = 0;
+        fish.text.textContent = answer;
+        fish.img.src = "./assets/textures/chest_21x16.png";
+        fish.img.alt = "chest";
+        fish.isActive = false;
+        fish.isChest = true;
 
-            this.chests.push(fish);
-            GAME_MANAGER.instantiateGameObject(fish);
-        }
+        this.chests.push(fish);
+        GAME_MANAGER.instantiateGameObject(fish);
+    }
 }

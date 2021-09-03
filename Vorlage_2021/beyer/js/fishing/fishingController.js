@@ -7,11 +7,18 @@ class FishingController extends GameObject{
     // The max depth a player can reach
     maxDepth = -5;
 
+    // Scale of depth
+    depthScale = 0.4;
+
     // The max depth a player reached
     reachedDepth = 0;
 
     // The number of lives a player has
     hearts = 3;
+
+    // Map values of the depthMeter
+    depthMeterRange = 68;
+    depthMeterOffset = 9;
 
     // All fish in the scene
     fishList = [];
@@ -73,30 +80,35 @@ class FishingController extends GameObject{
      * @override
      */
     update(deltaTime){
-
+        // Refresh every 2nd frame
         this.refreshUI = !this.refreshUI;
         if(this.refreshUI) return;
         
+        // Change the background-color aligned to the depth of the sea
         let backgroundColor = Math.lerpRGBColor({r: 0, g: 149, b: 255}, {r: 6, g: 35, b: 142}, this.curDepth / this.maxDepth);
         GAME_FRAME.style.background = "rgb(" + backgroundColor.r + "," + backgroundColor.g + "," + backgroundColor.b + ")";
         
+        // calc new depth
         if(Fish.prototype.isSinking || Fish.prototype.isRising) 
-            this.curDepth += Fish.prototype.sinkSpeed * 0.4;
+            this.curDepth += Fish.prototype.sinkSpeed * this.depthScale;
 
-        this.depthMeterPointerElement.style.top = (this.curDepth / this.maxDepth) * 68 + 9 + "%";
+        // Map the curDepth to the depthMete
+        this.depthMeterPointerElement.style.top = (this.curDepth / this.maxDepth) * this.depthMeterRange + this.depthMeterOffset + "%";
 
-        
-        if(!this.dontActivateGround && Fish.prototype.isSinking && this.curDepth <= this.maxDepth + 3){
+        // Show the ground and let it start moving
+        if(!this.dontActivateGround && Fish.prototype.isSinking && this.curDepth <= this.maxDepth + 2.96){
             this.ground.isActive = true;
             this.ground.spawnChests();
             this.dontActivateGround = true;
         }
 
+        // Stop at the bottom of the sea
         if(Fish.prototype.isSinking && this.curDepth <= this.maxDepth){
             Fish.prototype.sinkSpeed = 0;
             Fish.prototype.isSinking = false;
         }
 
+        // Hook is at the top of the sea
         if(Fish.prototype.isRising && this.curDepth >= 0){
             if(Fish.prototype.sinkSpeed > 0){
                 Fish.prototype.sinkSpeed = 0;
@@ -138,10 +150,15 @@ class FishingController extends GameObject{
         this.heartContainer.style.width = this.hearts * 50 + "px";
         if(this.hearts <= 0){
             // Game over
-            this.mathFieldElement.innerText = this.mathFieldElement.innerText.substring(0, this.mathFieldElement.innerText.length - 1) + FishingController.prototype.answer;
+            this.mathFieldElement.innerText = this.mathFieldElement.innerText.substring(
+                0, 
+                this.mathFieldElement.innerText.length - 1
+            ) + FishingController.prototype.answer;
+
             SCENE_MANAGER.loadScene(SceneEnum.score, {score:this.score + this.hook.nrOfFishCaught});
         }
 
+        // Loop over all fish and let them leave the screen
         for (const fish of this.fishList) {
             fish.isCollisionActive = false;
             fish.swimSpeed += .2;

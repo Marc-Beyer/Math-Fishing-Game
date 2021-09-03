@@ -18,8 +18,6 @@ window.addEventListener("fullscreenchange", async function(){
     setFrameSize();
 });
 
-document.querySelector("#reziseBtn").addEventListener("click", ()=>{setFrameSize(false);});
-
 setFrameSize();
 
 // Register customElements  
