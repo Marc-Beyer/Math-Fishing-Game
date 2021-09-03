@@ -13,9 +13,16 @@ let Environment;
 
 // Add resize event listener and set the initial size
 window.addEventListener("resize", setFrameSize());
+window.addEventListener("fullscreenchange", async function(){
+    // Trigger resize after the fullscreenchange-event (fallback for firefox)
+    setFrameSize();
+});
+
+document.querySelector("#reziseBtn").addEventListener("click", ()=>{setFrameSize(false);});
+
 setFrameSize();
 
-// Register customElements
+// Register customElements  
 registerCustomElements();
 
 // Load the first scene
@@ -40,6 +47,8 @@ function registerCustomElements(){
  */
 function setFrameSize(isFullscreen = false){
     boundingRect = GAME_FRAME.getBoundingClientRect();
+    console.log(boundingRect);
+    console.log(document.body.getBoundingClientRect());
 
     if(document.fullscreenElement || isFullscreen){
         boundingRect.width = window.screen.width;
@@ -47,8 +56,9 @@ function setFrameSize(isFullscreen = false){
     }
 
     scale = boundingRect.width/433;
-    if(boundingRect.width < 800)
+    if(boundingRect.width < 800){
         scale = boundingRect.width/150;
+    }
 
     // Set the Environment.Object
     Environment = {

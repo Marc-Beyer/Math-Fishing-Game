@@ -61,7 +61,7 @@ class SceneManager{
 
         let hook = new Hook(Environment.width/2, Environment.height/2, 16, 16);
         hook.FishingController = {
-            tutorialCatch: () => {
+            correctAnswerGiven: () => {
                 Fish.prototype.sinkSpeed = 0;
                 hook.lastYPosition = hook.positionY;
                 hook.nextYPosition = hook.height -2;

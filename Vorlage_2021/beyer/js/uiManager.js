@@ -99,13 +99,13 @@ class UIManager{
             // waiting for fullscreen
             document.documentElement.requestFullscreen().then(()=>{
                 // Firefox doesn't trigger the resize-event correctly on changing to fullscreen
-                setFrameSize(true);
+                setFrameSize();
             });
         } else {
             if (document.exitFullscreen) {
                 document.exitFullscreen();
             }
         }
-        setFrameSize();
+        //setFrameSize();
       }
 }

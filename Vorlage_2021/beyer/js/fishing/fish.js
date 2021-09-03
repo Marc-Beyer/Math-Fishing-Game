@@ -63,6 +63,11 @@ class Fish extends GameObject{
         this.width = FISH_DICTIONARY[rdmNr].width;
         this.height = FISH_DICTIONARY[rdmNr].height;
         
+        if(Fish.prototype.isRising){
+            this.text.textContent = "BONUS";
+            return;
+        }
+
         if(Fish.prototype.curNrTillCorrectAnswer > 0){
             this.number = Math.randomInt(100);
         }else{

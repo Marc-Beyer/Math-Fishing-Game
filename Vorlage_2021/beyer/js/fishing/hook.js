@@ -126,7 +126,7 @@ class Hook extends GameObject{
                 let isAnswerCorrect = FishingController.prototype.answer === gameObject.number;
 
                 if(isAnswerCorrect){
-                    this.nrOfFishCaught += 2;
+                    this.nrOfFishCaught += Math.randomIntRange(2, 8);
                 }
 
                 SCENE_MANAGER.loadScene(SceneEnum.score, {score:this.FishingController.score + this.nrOfFishCaught});
@@ -145,7 +145,6 @@ class Hook extends GameObject{
 
         if(FishingController.prototype.answer === "tutorial"){
             Fish.prototype.isRising = true;
-            this.FishingController.tutorialCatch();
             isAnswerCorrect = true;
         }
 
@@ -168,10 +167,13 @@ class Hook extends GameObject{
             gameObject.style.transform = "rotateZ(" + rdmFishRotation + "deg) translate(" + fishOffset + "px)";
             gameObject.text.style.display = "none";
 
+            // If no fish was cought yet, start rising
             if (Fish.prototype.isSinking || !Fish.prototype.isRising) {
                 Fish.prototype.sinkSpeed = 0.1;
                 Fish.prototype.isSinking = false;
                 Fish.prototype.isRising = true;
+
+                this.FishingController.correctAnswerGiven();
             }
         }else{ 
             // Answer is wrong

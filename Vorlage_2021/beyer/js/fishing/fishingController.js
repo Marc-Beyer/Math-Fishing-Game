@@ -120,6 +120,15 @@ class FishingController extends GameObject{
     }
 
     /**
+     * Called when the player chooses a correct answer
+     */
+    correctAnswerGiven(){
+        for (const fish of this.fishList) {
+            fish.text.textContent = "BONUS";
+        }
+    }
+
+    /**
      * Called when the player chooses a wrong answer
      * Check if the player has lost all hearts
      * Let all fish leave the screen

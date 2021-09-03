@@ -66,7 +66,7 @@ class Ground extends GameObject{
             fish.number = answer;
             fish.swimSpeed = 0;
             fish.text.textContent = answer;
-            fish.img.src = "./assets/textures/chest_17x15.png";
+            fish.img.src = "./assets/textures/chest_21x16.png";
             fish.img.alt = "chest";
             fish.isActive = false;
             fish.isChest = true;

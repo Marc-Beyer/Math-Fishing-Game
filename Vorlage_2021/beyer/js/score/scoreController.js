@@ -15,6 +15,8 @@ class ScoreController extends GameObject{
     constructor(parameter){
         super(0, 0, 0, 0, "ScoreController");
 
+        GAME_FRAME.style = "";
+
         INPUT.removeKeyListener();
         UI_MANAGER.toggleScoreBoard(true);
 
