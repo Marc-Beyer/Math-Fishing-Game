@@ -101,7 +101,7 @@ class ScoreController extends GameObject{
         let nameField = document.createElement("td");
         nameField.textContent = `${nr}. ${n}`;
 
-        let scoreField = document.createElement("trd");
+        let scoreField = document.createElement("td");
         scoreField.textContent = `${s}`;
 
         row.append(nameField);

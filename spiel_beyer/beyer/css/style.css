@@ -223,6 +223,12 @@ p{
     margin-top: 40px;
 }
 
+#score-board table tr:first-child td{
+    font-size: 2.5rem;
+    text-decoration: underline wavy black;
+    text-decoration-thickness: .05em;
+}
+
 #score-board table tr td{
     font-size: 2rem;
 }
