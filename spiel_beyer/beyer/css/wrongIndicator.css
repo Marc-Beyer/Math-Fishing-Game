@@ -1,0 +1,34 @@
+/*
+ * The style of the wrongIndicator
+ */
+#wrongIndicator{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+
+    font-size: 0rem;
+    color: red;
+    -webkit-text-stroke: 2px black;
+
+    display: none;
+}
+
+#wrongIndicator.showAnimation{
+    display: block;
+    display: initial;
+    animation-name: show;
+    animation-duration: 2s;
+}
+
+@keyframes show {
+    from {
+        font-size: 0rem;
+        transform: translate(-50%, -50%);
+    }
+    to {
+        font-size: 15rem;
+        transform: translate(-50%, -50%) rotateZ(45deg);
+    }
+}

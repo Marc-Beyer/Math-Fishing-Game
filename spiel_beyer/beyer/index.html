@@ -4,15 +4,22 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
     <link rel="icon" href="./assets/fish-icon.svg" type="image/svg+xml">
+
+    <title>Math-Fishing</title>
+    
+    <link rel="stylesheet" href="css/score.css">
+    <link rel="stylesheet" href="css/depthMeter.css">
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/tutorial.css">
+    <link rel="stylesheet" href="css/uiElements.css">
+    <link rel="stylesheet" href="css/wrongIndicator.css">
+    <link rel="stylesheet" href="css/style.css">
     
     <!-- All JavaScripts are injected here, next time I really should try to use ES6-modules -->
     <script src="./js/lib.js" defer></script>
     <script src="./js/dictionary.js" defer></script>
-
     <script src="./js/input.js" defer></script>
-    <script src="./js/audioManager.js" defer></script>
     <script src="./js/gameObject.js" defer></script>
     
     <script src="./js/fishing/ground.js" defer></script>
@@ -29,8 +36,6 @@
     <script src="./js/uiManager.js" defer></script>
 
     <script src="./js/main.js" defer></script>
-
-    <title>Math-Fishing</title>
 </head>
 <body>
     <div id="game-container">
@@ -62,6 +67,11 @@
                 <button id="score-board-button">Deinen Score Eintragen</button>
                 <table id="score-board-table">
                 </table>
+            </div>
+
+            <!-- Intro -->
+            <div id="intro">
+                
             </div>
 
             <!-- The tutorial -->

@@ -1,0 +1,26 @@
+/*
+ * The style of the tutorial
+ */
+#tutorial{
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+}
+
+#tutorial div{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    width: 100%;
+    flex-direction: row;
+
+    font-size: 2rem;
+}
+
+#tutorial div img{
+    height: 50vh;
+    width: calc(50vh*(64/150));
+}

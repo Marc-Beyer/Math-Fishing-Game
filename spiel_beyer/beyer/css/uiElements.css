@@ -1,0 +1,54 @@
+/*
+ * The style of UI Elements
+ */
+#mathField{
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+
+    padding: .5rem 1rem;
+    background-color: aliceblue;
+    outline: .4rem solid black;
+    font-size: 3rem;
+
+    z-index: 1000;
+}
+
+#open-menu{
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    height: 50px;
+    width: 50px;
+
+    background: url("../assets/textures/ui/menu_16x16.png");
+    background-size: cover;
+
+    margin: 20px;
+
+    image-rendering: crisp-edges;
+    border: none;
+
+    z-index: 1000;
+}
+
+#heart-container{
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    height: 50px;
+    width: 150px;
+
+    margin: 20px;
+
+    background: url("../assets/textures/ui/heart_9x9.png");
+    background-size: contain;
+
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    
+    z-index: 1000;
+}

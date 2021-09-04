@@ -1,0 +1,23 @@
+/*
+ * The style of the depthMeter
+ */
+#depthMeter{
+    position: absolute;
+    left: 1%;
+    bottom: 1%;
+    width: 5%;
+    
+    z-index: 1000;
+}
+
+#depthMeter-pointer{
+    position: absolute;
+    right: 0;
+    width: 50%;
+    top: 77%;       /* 9% - 77% */
+}
+
+#depthMeter-text{
+    position: absolute;
+    top: 0;
+}

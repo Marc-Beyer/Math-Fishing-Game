@@ -1,0 +1,85 @@
+/*
+ * The style of the menu
+ */
+#menu{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background-color: rgba(0,0,0,0.7);
+
+    z-index: 2000;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+    display: none;
+}
+
+#menu.show{
+    display: flex;
+}
+
+#menu h2{
+    flex: 1;
+
+    display:flex;
+    justify-content: center;
+    align-items: flex-end;
+
+    color: var(--menu-color);
+    font-size: 4rem;
+}
+
+#menu #button-container{
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#menu #button-container button{
+    width: calc(48vh / 1.5);
+    height: calc(16vh / 1.5);
+
+    margin-top: 15px;
+    padding: 1em 2em;
+
+    color: var(--menu-color);
+    border: none;
+
+    background: none;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position-x: center;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    
+    text-align: center;
+    font-size: 1.7rem;
+}
+
+
+#menu #button-container button:hover{
+    opacity: 0.6;
+}
+
+#menu #button-container #fullscreenBtn{
+    background-image: url("../assets/textures/ui/Vollbild-btn_48x16.png");
+}
+
+#menu #button-container #restartBtn{
+    background-image: url("../assets/textures/ui/Neustart-btn_48x16.png");
+}
+
+#menu #button-container #resumeBtn{
+    background-image: url("../assets/textures/ui/Weiter-btn_48x16.png");
+}
+
+#menu button:hover{
+    image-rendering: auto;
+}
