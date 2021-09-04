@@ -118,7 +118,7 @@ class SceneManager{
             fishingController.fishList.push(GAME_MANAGER.instantiateGameObject(new Fish(Math.random()*Environment.width-18, Math.random()*Environment.height-9, 18, 9)));
         }
         for (let index = 0; index < 20; index++) {
-            fishingController.bubbleList.push(GAME_MANAGER.instantiateGameObject(new Bubble(Math.random()*Environment.width-18, Math.random()*Environment.height-9, 18, 9)));
+            fishingController.bubbleList.push(GAME_MANAGER.instantiateGameObject(new Bubble(Math.random()*Environment.width-18, Math.random()*Environment.height-9, 18, 9, "Bubble")));
         }
     }
 

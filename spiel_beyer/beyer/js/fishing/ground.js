@@ -6,6 +6,9 @@ class Ground extends GameObject{
     // The final position of the ground
     finalXPosition = -36.4375;
 
+    // The start position of the ground
+    startPos = 200;
+
     // Chest at the ground
     chests = [];
 
@@ -17,6 +20,7 @@ class Ground extends GameObject{
      */
      constructor(){
         super(0, 200, 433, 280, "ground");
+        this.positionY = this.startPos;
 
         this.finalXPosition = -(Environment.scale.y * 280 - Environment.realHeight) / Environment.scale.y;
     }

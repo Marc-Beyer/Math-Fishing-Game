@@ -1,1 +1,2 @@
-TODO
+In "Mathe Fischer" versuchst du so viele Fische wie möglich zu fangen!
+Stelle deine mathematischen Fähigkeiten unter Beweis, um Fische zu angeln und den Highscore zu knacken.

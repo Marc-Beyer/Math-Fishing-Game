@@ -5,10 +5,13 @@
 class FishingController extends GameObject{
 
     // The max depth a player can reach
-    maxDepth = -5;
+    maxDepth = -4;
 
     // Scale of depth
     depthScale = 0.4;
+
+    // The point when the ground is reached
+    groundStartPos = 2.7742;
 
     // The max depth a player reached
     reachedDepth = 0;
@@ -68,9 +71,16 @@ class FishingController extends GameObject{
             this.wrongIndicatorEnded();
         });
 
+        // Spawn the ground and chests
         this.ground = new Ground();
         this.ground.isActive = false;
         GAME_MANAGER.instantiateGameObject(this.ground);
+        this.groundStartPos = -(this.ground.startPos - this.ground.finalXPosition) * Fish.prototype.sinkSpeed * this.depthScale * Environment.scale.y / 3;
+        this.ground.spawnChests();
+
+        if(this.curDepth <= this.maxDepth + this.groundStartPos){
+            this.curDepth = this.maxDepth + this.groundStartPos;
+        }
     }
     
     /**
@@ -96,9 +106,8 @@ class FishingController extends GameObject{
         this.depthMeterPointerElement.style.top = (this.curDepth / this.maxDepth) * this.depthMeterRange + this.depthMeterOffset + "%";
 
         // Show the ground and let it start moving
-        if(!this.dontActivateGround && Fish.prototype.isSinking && this.curDepth <= this.maxDepth + 2.96){
+        if(!this.dontActivateGround && Fish.prototype.isSinking && this.curDepth <= this.maxDepth + this.groundStartPos){
             this.ground.isActive = true;
-            this.ground.spawnChests();
             this.dontActivateGround = true;
         }
 

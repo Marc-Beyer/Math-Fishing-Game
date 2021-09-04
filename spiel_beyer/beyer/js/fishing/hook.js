@@ -148,7 +148,7 @@ class Hook extends GameObject{
             isAnswerCorrect = true;
         }
 
-        if(isAnswerCorrect && Fish.prototype.isSinking){
+        if(isAnswerCorrect && (Fish.prototype.isSinking || !Fish.prototype.isRising) ){
             this.FishingController.reachedDepth = this.FishingController.curDepth;
         }
 
