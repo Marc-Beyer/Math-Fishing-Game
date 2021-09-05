@@ -123,10 +123,12 @@ class ScoreController extends GameObject{
      */
     getScoreFromStorage(){
         let highscoreArr = JSON.parse(localStorage.getItem("highscore"));
+        console.log(highscoreArr);
         if(highscoreArr){
             highscoreArr = highscoreArr.sort((elem1, elem2)=>{
-                return elem1.s < elem2.s;
+                return elem2.s - elem1.s;
             });
+            console.log(highscoreArr);
             return highscoreArr;
         }
         return [];
@@ -144,7 +146,7 @@ class ScoreController extends GameObject{
         });
 
         this.highscore = this.highscore.sort((elem1, elem2)=>{
-            return elem1.s < elem2.s;
+            return elem2.s - elem1.s;
         });
         
         if(this.highscore.length > 50){
@@ -152,5 +154,5 @@ class ScoreController extends GameObject{
         }
 
         localStorage.setItem("highscore", JSON.stringify(this.highscore));
-    }
+    }   
 }
