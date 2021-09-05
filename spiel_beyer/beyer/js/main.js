@@ -4,7 +4,6 @@ const GAME_MANAGER = new GameManager();
 const SCENE_MANAGER = new SceneManager();
 const UI_MANAGER = new UIManager();
 const INPUT = new Input();
-//const AUDIO_MANAGER = new AudioManager();
 
 // Global parameter about the size
 let boundingRect;
@@ -45,8 +44,6 @@ function registerCustomElements(){
  */
 function setFrameSize(isFullscreen = false){
     boundingRect = GAME_FRAME.getBoundingClientRect();
-    console.log(boundingRect);
-    console.log(document.body.getBoundingClientRect());
 
     if(document.fullscreenElement || isFullscreen){
         boundingRect.width = window.screen.width;

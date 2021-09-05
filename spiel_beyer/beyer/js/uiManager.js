@@ -10,12 +10,19 @@ class UIManager{
      * Get UI-elements and add eventListener
      */
     constructor(){
+        this.intro = document.querySelector("#intro");
+        this.introBtn = document.querySelector("#intro button");
         this.menu = document.querySelector("#menu");
         this.openMenuBtn = document.querySelector("#open-menu");
         this.fullscreenBtn = document.querySelector("#fullscreenBtn");
         this.restartBtn = document.querySelector("#restartBtn");
         this.resumeBtn = document.querySelector("#resumeBtn");
         this.wrongIndicator = document.querySelector("#wrongIndicator");
+
+        this.introBtn.addEventListener("click", ()=>{
+            this.introBtn.classList.add("hidden");
+            SCENE_MANAGER.loadScene(SceneEnum.tutorial);
+        });
 
         this.wrongIndicator.addEventListener("animationend", this.wrongMSGAnimationendHandler);
 
@@ -82,8 +89,10 @@ class UIManager{
     toggleTutorial(value){
         if(value){
             document.querySelector("#tutorial").classList.remove("hidden");
+            this.intro.classList.remove("hidden");
         }else{
             document.querySelector("#tutorial").classList.add("hidden");
+            this.intro.classList.add("hidden");
         }
 
         document.querySelector("#open-menu").hidden = value;

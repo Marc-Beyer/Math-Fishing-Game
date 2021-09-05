@@ -49,6 +49,11 @@ let FISH_DICTIONARY = [
         src: "./assets/textures/fish/jellyfish_02-18x17.gif",
         width: 20,
         height: 13
+    },
+    {
+        src: "./assets/textures/fish/jellyfish_03-7x7.gif",
+        width: 7,
+        height: 7
     }
     
 ];

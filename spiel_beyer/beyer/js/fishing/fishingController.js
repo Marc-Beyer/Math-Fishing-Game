@@ -5,7 +5,7 @@
 class FishingController extends GameObject{
 
     // The max depth a player can reach
-    maxDepth = -4;
+    maxDepth = -50;
 
     // Scale of depth
     depthScale = 0.4;
@@ -80,6 +80,8 @@ class FishingController extends GameObject{
 
         if(this.curDepth <= this.maxDepth + this.groundStartPos){
             this.curDepth = this.maxDepth + this.groundStartPos;
+            // make it unlikely to spawn a fish with the correct answer and forcing the player to open one of the chests or loose hearts
+            Fish.prototype.curNrTillCorrectAnswer = 9999;
         }
     }
     

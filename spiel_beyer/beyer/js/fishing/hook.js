@@ -169,7 +169,7 @@ class Hook extends GameObject{
 
             // If no fish was cought yet, start rising
             if (Fish.prototype.isSinking || !Fish.prototype.isRising) {
-                Fish.prototype.sinkSpeed = 0.1;
+                Fish.prototype.sinkSpeed = Fish.prototype.risingSpeed;
                 Fish.prototype.isSinking = false;
                 Fish.prototype.isRising = true;
 

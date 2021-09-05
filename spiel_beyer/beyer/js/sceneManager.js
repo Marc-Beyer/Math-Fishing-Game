@@ -3,7 +3,8 @@ const SceneEnum = Object.freeze({
     "intro": 0,
     "score": 1,
     "fishing": 2,
-    "test": 3
+    "test": 3,
+    "tutorial": 4
 }); 
 
 /**
@@ -12,7 +13,7 @@ const SceneEnum = Object.freeze({
 class SceneManager{
 
     // Assign loading-functions to their correct position in the SceneEnum
-    scenes = [this.loadIntroScene, this.loadScoreScene, this.loadFishingScene, this.loadTestScene];
+    scenes = [this.loadIntroScene, this.loadScoreScene, this.loadFishingScene, this.loadTestScene, this.loadTutorialScene];
 
     // Set the startScene
     curScene = SceneEnum.intro;
@@ -41,7 +42,6 @@ class SceneManager{
         GAME_MANAGER.removeAllGameObjects();
         this.curScene = sceneNr;
         this.scenes[sceneNr](parameter);
-        console.log(parameter);
     }
 
     /**
@@ -56,6 +56,14 @@ class SceneManager{
      * @param
      */
     loadIntroScene(parameter = null){
+        // Nothing to load
+    }
+
+    /**
+     * Load the tutorial-scene
+     * @param
+     */
+    loadTutorialScene(parameter = null){
 
         UI_MANAGER.toggleTutorial(true);
 
