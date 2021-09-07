@@ -23,35 +23,20 @@ class ScoreController extends GameObject{
         this.scoreBoardInput = document.querySelector("#score-board-input");
         this.scoreBoardTable = document.querySelector("#score-board-table");
         this.scoreBoardButton = document.querySelector("#score-board-button");
-        this.scoreBoardButton.addEventListener("click", ()=>{
-            if(this.restartGame){
-                INPUT.addKeyListener();
-                UI_MANAGER.toggleScoreBoard(false);
-                SCENE_MANAGER.loadScene(SceneEnum.fishing);
-                this.scoreBoardInput.hidden = false;
-                this.scoreBoardButton.textContent = "Deinen Score Eintragen";
-                this.restartGame = false;
-                return;
-            }
+        
+        // Colone the old button to remove all EventListener
+        let newScoreBoardButton = this.scoreBoardButton.cloneNode(true);
+        this.scoreBoardButton.parentNode.replaceChild(newScoreBoardButton, this.scoreBoardButton);
+        this.scoreBoardButton = newScoreBoardButton;
+        this.scoreBoardButton.addEventListener("click", this.handleClick);
 
-            if(this.scoreBoardInput.value){
-                this.addNewScore(this.score, this.scoreBoardInput.value);
-                this.showAllScoreEntrys();
-
-                this.scoreBoardInput.hidden = true;
-                this.scoreBoardButton.textContent = "Nochmal Versuchen";
-                this.restartGame = true;
-            }
-        });
-
+        // Colone the old input-field to remove all EventListener
+        let newscoreBoardInput = this.scoreBoardInput.cloneNode(true);
+        this.scoreBoardInput.parentNode.replaceChild(newscoreBoardInput, this.scoreBoardInput);
+        this.scoreBoardInput = newscoreBoardInput;
         this.scoreBoardInput.value = "";
         this.scoreBoardInput.focus();
-        this.scoreBoardInput.addEventListener("keyup", (e)=>{
-            if(e.key === "Enter" && this.scoreBoardInput.value){
-                this.scoreBoardButton.click();
-                this.scoreBoardButton.focus();
-            }
-        });
+        this.scoreBoardInput.addEventListener("keyup", this.handleKeyUp);
 
         if(parameter?.score !== undefined && parameter?.score !== null){
             this.score = parameter.score;
@@ -74,6 +59,34 @@ class ScoreController extends GameObject{
         this.showAllScoreEntrys();
         
     }
+
+    handleKeyUp = (e)=>{
+        if(e.key === "Enter" && this.scoreBoardInput.value){
+            this.scoreBoardButton.click();
+            this.scoreBoardButton.focus();
+        }
+    };
+
+    handleClick = ()=>{
+        if(this.restartGame){
+            INPUT.addKeyListener();
+            UI_MANAGER.toggleScoreBoard(false);
+            SCENE_MANAGER.loadScene(SceneEnum.fishing);
+            this.scoreBoardInput.hidden = false;
+            this.scoreBoardButton.textContent = "Deinen Score Eintragen";
+            this.restartGame = false;
+            return;
+        }
+
+        if(this.scoreBoardInput.value){
+            this.addNewScore(this.score, this.scoreBoardInput.value);
+            this.showAllScoreEntrys();
+
+            this.scoreBoardInput.hidden = true;
+            this.scoreBoardButton.textContent = "Nochmal Versuchen";
+            this.restartGame = true;
+        }
+    };
 
     /**
      * Show the highscore
@@ -123,12 +136,10 @@ class ScoreController extends GameObject{
      */
     getScoreFromStorage(){
         let highscoreArr = JSON.parse(localStorage.getItem("highscore"));
-        console.log(highscoreArr);
         if(highscoreArr){
             highscoreArr = highscoreArr.sort((elem1, elem2)=>{
                 return elem2.s - elem1.s;
             });
-            console.log(highscoreArr);
             return highscoreArr;
         }
         return [];

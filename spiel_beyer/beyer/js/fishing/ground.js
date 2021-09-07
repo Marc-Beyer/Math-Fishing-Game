@@ -44,7 +44,12 @@ class Ground extends GameObject{
      */
     update(deltaTime){
         if(this.positionY > this.finalXPosition || Fish.prototype.isRising){
-            this.positionY += Fish.prototype.sinkSpeed * deltaTime;
+            // If the player is at the bottom of the sea, move the ground to it's final x-position
+            if(Fish.prototype.sinkSpeed === 0){
+                this.positionY -= Fish.prototype.speed * deltaTime;
+            }else{
+                this.positionY += Fish.prototype.sinkSpeed * deltaTime;
+            }
 
             for (const chest of this.chests) {
                 chest.positionY = this.positionY + this.chestsOffset;

@@ -126,10 +126,11 @@ class Fish extends GameObject{
 }
 
 // "Static" variables
+Fish.prototype.speed = 0.02;
 Fish.prototype.risingSpeed = 0.2;
 Fish.prototype.sinkSpeed = -0.02;
 Fish.prototype.isSinking = true;
 Fish.prototype.isRising = false;
 
-Fish.prototype.curNrTillCorrectAnswer = 5;
-Fish.prototype.nrTillCorrectAnswer = 7;
+Fish.prototype.curNrTillCorrectAnswer = 6;
+Fish.prototype.nrTillCorrectAnswer = 6;

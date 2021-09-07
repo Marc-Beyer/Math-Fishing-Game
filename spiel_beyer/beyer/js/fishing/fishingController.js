@@ -5,7 +5,7 @@
 class FishingController extends GameObject{
 
     // The max depth a player can reach
-    maxDepth = -50;
+    maxDepth = -5;
 
     // Scale of depth
     depthScale = 0.4;
@@ -59,12 +59,11 @@ class FishingController extends GameObject{
         this.curDepth = curDepth;
         this.refreshUI = true;
 
-        // Set static values
-        Fish.prototype.sinkSpeed = -0.02;
+        // Reset static values
+        Fish.prototype.sinkSpeed = -Fish.prototype.speed;
         Fish.prototype.isSinking = true;
         Fish.prototype.isRising = false;
-        Fish.prototype.curNrTillCorrectAnswer = 5;
-        Fish.prototype.nrTillCorrectAnswer = 7;
+        Fish.prototype.curNrTillCorrectAnswer = Fish.prototype.nrTillCorrectAnswer;
 
         
         UI_MANAGER.wrongIndicator.addEventListener("animationend", ()=>{
