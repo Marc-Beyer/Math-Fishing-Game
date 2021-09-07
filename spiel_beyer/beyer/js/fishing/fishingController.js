@@ -5,7 +5,7 @@
 class FishingController extends GameObject{
 
     // The max depth a player can reach
-    maxDepth = -5;
+    maxDepth = -50;
 
     // Scale of depth
     depthScale = 0.4;
