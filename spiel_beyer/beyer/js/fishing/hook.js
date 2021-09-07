@@ -174,7 +174,7 @@ class Hook extends GameObject{
             gameObject.style.transform = "rotateZ(" + rdmFishRotation + "deg) translate(" + fishOffset + "px)";
             gameObject.text.style.display = "none";
 
-            // If no fish was cought yet, start rising
+            // If no fish was caught yet, start rising
             if (Fish.prototype.isSinking || !Fish.prototype.isRising) {
                 Fish.prototype.sinkSpeed = Fish.prototype.risingSpeed;
                 Fish.prototype.isSinking = false;
