@@ -1,4 +1,5 @@
 .vscode
+.vs
 node_modules
 out
 /Vorlage_2021/bib_logo.png
