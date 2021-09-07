@@ -83,7 +83,14 @@ class Hook extends GameObject{
             }
             
         }else{
-            this.positionY = Math.clamp(this.positionY + INPUT.mouseScroll * deltaTime, 10, Environment.height - this.height - 10);
+            if(Hook.prototype.controlScheme === 0){
+                // Control with mouse scroll wheel
+                this.positionY = Math.clamp(this.positionY + INPUT.mouseScroll * deltaTime, 10, Environment.height - this.height - 10);
+            }else{
+                // Control with mouse y-position
+                this.positionY += (INPUT.mousePosition.y - this.height/2 - this.positionY ) / (1 * deltaTime);
+                this.positionY = Math.clamp(this.positionY, 10, Environment.height - this.height - 10);
+            }
         }
     }
 
@@ -182,3 +189,5 @@ class Hook extends GameObject{
         }
     }
 }
+
+Hook.prototype.controlScheme = 0;
